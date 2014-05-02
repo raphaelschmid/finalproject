@@ -35,7 +35,7 @@ namespace KinectYp {
             SkeletonPoint foot = s.Joints[JointType.FootRight].Position;
             SkeletonPoint head = s.Joints[JointType.Head].Position;
             lblFootPosition.Text = string.Format("X-Position: {0}{3}Y-Position: {1}{3}Z-Position: {2}", foot.X, foot.Y, foot.Z, Environment.NewLine);
-            lblHeadPosition.Text = string.Format("X-Position: {0}{3}Y-Position: {1}{3}Z-Position: {2}", head.X, head.Y, head.Z, Environment.NewLine);
+            lblHeadPosition.Text = string.Format("X-Position: {0}{3}Y-Position: {1}{3}Z-Position: {2}{3}Delta head-foot: {4}", head.X, head.Y, head.Z, Environment.NewLine, head.Z-foot.Z);
         }
 
         private void Punched(object sender, SkeletonPoint p, Boolean t) {
@@ -51,6 +51,11 @@ namespace KinectYp {
 
         private void setlblKick(string s) {
             lblKick.Text = s;
+        }
+
+        private void lblKick_Click(object sender, EventArgs e)
+        {
+
         }
    
     }

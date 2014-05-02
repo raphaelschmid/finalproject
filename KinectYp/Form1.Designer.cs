@@ -39,6 +39,7 @@
             this.lblKick.Size = new System.Drawing.Size(91, 29);
             this.lblKick.TabIndex = 0;
             this.lblKick.Text = "normal";
+            this.lblKick.Click += new System.EventHandler(this.lblKick_Click);
             // 
             // lblFootPosition
             // 
