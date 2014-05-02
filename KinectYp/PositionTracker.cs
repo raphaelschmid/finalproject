@@ -80,11 +80,11 @@ namespace KinectYp {
 
 
 
-            if (first.Joints[JointType.FootRight].Position.Z < first.Joints[JointType.Head].Position.Z - 0.2)
+            if (first.Joints[JointType.FootRight].Position.Z < first.Joints[JointType.Head].Position.Z - 0.3)
             {
                 Punched(this, first.Joints[JointType.FootRight].Position, true);
             }
-            else if (first.Joints[JointType.FootRight].Position.Z > first.Joints[JointType.Head].Position.Z - 0.2)
+            else if (first.Joints[JointType.FootRight].Position.Z > first.Joints[JointType.Head].Position.Z - 0.3)
             {
                 Punched(this, first.Joints[JointType.FootRight].Position, false);
             }
