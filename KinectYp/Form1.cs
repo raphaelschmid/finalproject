@@ -24,6 +24,10 @@ namespace KinectYp {
             positionTracker.Stay += Stay;
             positionTracker.PositionChanged += PositionChanged;
             lblKick.Text = "normal";
+
+            List<IErkenner> erkenners = new List<IErkenner>();
+
+            erkenners.Add(new Punch(this));
         }
 
         private void Stay(object sender)
@@ -32,21 +36,16 @@ namespace KinectYp {
         }
 
         private void PositionChanged(object sender, Skeleton s) {
+
+
             SkeletonPoint foot = s.Joints[JointType.FootRight].Position;
             SkeletonPoint head = s.Joints[JointType.Head].Position;
             lblFootPosition.Text = string.Format("X-Position: {0}{3}Y-Position: {1}{3}Z-Position: {2}", foot.X, foot.Y, foot.Z, Environment.NewLine);
             lblHeadPosition.Text = string.Format("X-Position: {0}{3}Y-Position: {1}{3}Z-Position: {2}{3}Delta head-foot: {4}", head.X, head.Y, head.Z, Environment.NewLine, head.Z-foot.Z);
         }
 
-        private void Punched(object sender, SkeletonPoint p, Boolean t) {
-            if (t)
-            {
-                setlblKick("Forward");
-            }
-            else
-            {
-                setlblKick("Back");
-            }
+        private void Punched(object sender, SkeletonPoint p, Action action) {
+                setlblKick(action.ToString());
         }
 
         private void setlblKick(string s) {
@@ -54,6 +53,11 @@ namespace KinectYp {
         }
 
         private void lblKick_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
         {
 
         }

@@ -18,12 +18,15 @@ namespace KinectYp {
         public event PunchEventHandler Punched;
         public event StayEventHandler Stay;
         public event PositionChangedEventHandler PositionChanged;
+        private SkeletonHistory skeletonHistory;
+
 
         public PositionTracker() {
             
         }
 
         public void Init() {
+            skeletonHistory = new SkeletonHistory(30);
             DiscoverSensor();
 
             if (_sensor == null) {
@@ -73,26 +76,12 @@ namespace KinectYp {
 
             //Gibt ein Koerper
             Skeleton first =  GetFirstSkeleton(e);
+            skeletonHistory.Push(first);
 
-            if (first == null) {
-                return;
-            }
-
-
-
-            if (first.Joints[JointType.FootRight].Position.Z < first.Joints[JointType.Head].Position.Z - 0.3)
+            if (skeletonHistory.IsReady())
             {
-                Punched(this, first.Joints[JointType.FootRight].Position, true);
+
             }
-            else if (first.Joints[JointType.FootRight].Position.Z > first.Joints[JointType.Head].Position.Z - 0.3)
-            {
-                Punched(this, first.Joints[JointType.FootRight].Position, false);
-            }
-            else
-            {
-                Stay(this);
-            }
-            PositionChanged(this, first);
             
         }
 
