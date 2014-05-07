@@ -34,7 +34,7 @@ namespace KinectYp {
             erkenners = new List<IErkenner>();
             erkenners.Add(new RechtsLaufen());
             erkenners.Add(new LinksLaufen());
-            erkenners.Add(new Punch());
+            erkenners.Add(new Kick());
 
   
             DiscoverSensor();

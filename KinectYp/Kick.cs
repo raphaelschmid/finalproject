@@ -8,7 +8,7 @@ using Microsoft.Kinect;
 
 namespace KinectYp
 {
-    class Punch : IErkenner
+    class Kick : IErkenner
     {
 
         public bool Pruefe(Skeleton[] history)
@@ -16,13 +16,14 @@ namespace KinectYp
             System.Diagnostics.Debug.WriteLine("asdf");
 
             var rightFootZ = history.Select(x => x.Joints[JointType.FootRight].Position.Z);
+            var rightFootY = history.Select(x => x.Joints[JointType.FootRight].Position.Y);
 
-            return rightFootZ.Max() > rightFootZ.Min() + 0.5;
+            return (rightFootZ.Max() > rightFootZ.Min() + 0.5) && (rightFootY.Max() > rightFootY.Min() + 0.2);
         }
 
         public string GetMessage()
         {
-            return "Punched!";
+            return "Kick!";
         }
     }
 }
