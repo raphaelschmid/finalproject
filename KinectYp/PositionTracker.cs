@@ -12,20 +12,27 @@ namespace KinectYp {
         bool _closing = false;
         private const int _skeletonCount = 6;
         Skeleton[] _allSkeletons = new Skeleton[_skeletonCount];
-        public delegate void PunchEventHandler(object sender, SkeletonPoint p, Boolean t);
+        public delegate void PunchEventHandler(object sender, string message);
         public delegate void StayEventHandler(object sender);
         public delegate void PositionChangedEventHandler(object sender, Skeleton p);
         public event PunchEventHandler Punched;
         public event StayEventHandler Stay;
         public event PositionChangedEventHandler PositionChanged;
         private SkeletonHistory skeletonHistory;
+        private List<IErkenner> erkenners;
+ 
 
 
         public PositionTracker() {
-            
+
         }
 
         public void Init() {
+
+            //erkenner hizufügen
+            erkenners = new List<IErkenner>();
+            erkenners.Add(new Punch());
+
             skeletonHistory = new SkeletonHistory(30);
             DiscoverSensor();
 
@@ -80,8 +87,17 @@ namespace KinectYp {
 
             if (skeletonHistory.IsReady())
             {
+                foreach (var erkenner in erkenners)
+                {
+                    if (erkenner.Preuefe(skeletonHistory))
+                    {
+                        Punched(this, erkenner.GetMessage());
+                    }
 
+                }
             }
+            PositionChanged(this, first);
+
             
         }
 

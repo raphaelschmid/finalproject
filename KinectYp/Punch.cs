@@ -10,18 +10,17 @@ namespace KinectYp
 {
     class Punch : IErkenner
     {
-        private Form1 _form1;
 
-        public Punch(Form1 form1)
+        public bool Preuefe(SkeletonHistory history)
         {
-            _form1 = form1;
+            var rightFootZ = history.History.Select(x => x.Joints[JointType.FootRight].Position.Z);
+
+            return rightFootZ.Max() > rightFootZ.Min() + 0.5;
         }
 
-        public void Preuefe(SkeletonHistory history)
+        public string GetMessage()
         {
-            var zs = history.History.Select(x => x.Joints[JointType.FootRight].Position.Z);
-            
-            throw new NotImplementedException();
+            return "Punched!";
         }
     }
 }

@@ -25,9 +25,7 @@ namespace KinectYp {
             positionTracker.PositionChanged += PositionChanged;
             lblKick.Text = "normal";
 
-            List<IErkenner> erkenners = new List<IErkenner>();
 
-            erkenners.Add(new Punch(this));
         }
 
         private void Stay(object sender)
@@ -44,11 +42,13 @@ namespace KinectYp {
             lblHeadPosition.Text = string.Format("X-Position: {0}{3}Y-Position: {1}{3}Z-Position: {2}{3}Delta head-foot: {4}", head.X, head.Y, head.Z, Environment.NewLine, head.Z-foot.Z);
         }
 
-        private void Punched(object sender, SkeletonPoint p, Action action) {
-                setlblKick(action.ToString());
+        public void Punched(object sender, string message)
+        {
+                setlblKick(message);
         }
 
-        private void setlblKick(string s) {
+        private void setlblKick(string s)
+        {
             lblKick.Text = s;
         }
 

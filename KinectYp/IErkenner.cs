@@ -8,6 +8,8 @@ namespace KinectYp
 {
     interface IErkenner
     {
-        void Preuefe(SkeletonHistory history);
+        bool Preuefe(SkeletonHistory history);
+        string GetMessage();
+
     }
 }
