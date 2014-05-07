@@ -12,7 +12,7 @@ namespace KinectYp
 
         public bool Pruefe(Skeleton[] history)
         {
-            System.Diagnostics.Debug.WriteLine("asdf");
+            System.Diagnostics.Debug.WriteLine("asddf");
 
             var rightHandZ = history.Select(x => x.Joints[JointType.HandRight].Position.Z);
             var rightHandY = history.Select(x => x.Joints[JointType.HandRight].Position.Y);
