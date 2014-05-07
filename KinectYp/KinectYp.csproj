@@ -54,6 +54,7 @@
     <Compile Include="IErkenner.cs" />
     <Compile Include="KinectNotConnectedException.cs" />
     <Compile Include="LinksLaufen.cs" />
+    <Compile Include="MotionFunctions.cs" />
     <Compile Include="PositionTracker.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -84,6 +85,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="UDPServer.java" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
