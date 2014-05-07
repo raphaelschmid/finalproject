@@ -32,11 +32,11 @@
             // lblKick
             // 
             this.lblKick.AutoSize = true;
-            this.lblKick.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblKick.Location = new System.Drawing.Point(13, 37);
+            this.lblKick.Font = new System.Drawing.Font("Microsoft Sans Serif", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblKick.Location = new System.Drawing.Point(16, 9);
             this.lblKick.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblKick.Name = "lblKick";
-            this.lblKick.Size = new System.Drawing.Size(157, 52);
+            this.lblKick.Size = new System.Drawing.Size(138, 44);
             this.lblKick.TabIndex = 0;
             this.lblKick.Text = "normal";
             this.lblKick.Click += new System.EventHandler(this.lblKick_Click);
@@ -44,33 +44,33 @@
             // lblFootPosition
             // 
             this.lblFootPosition.AutoSize = true;
-            this.lblFootPosition.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblFootPosition.Location = new System.Drawing.Point(13, 119);
+            this.lblFootPosition.Font = new System.Drawing.Font("Microsoft Sans Serif", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblFootPosition.Location = new System.Drawing.Point(14, 410);
             this.lblFootPosition.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblFootPosition.Name = "lblFootPosition";
-            this.lblFootPosition.Size = new System.Drawing.Size(212, 52);
+            this.lblFootPosition.Size = new System.Drawing.Size(185, 44);
             this.lblFootPosition.TabIndex = 1;
             this.lblFootPosition.Text = "FootRight";
             // 
             // lblError
             // 
             this.lblError.AutoSize = true;
-            this.lblError.Font = new System.Drawing.Font("Microsoft Sans Serif", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblError.Location = new System.Drawing.Point(13, 756);
+            this.lblError.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblError.Location = new System.Drawing.Point(17, 845);
             this.lblError.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblError.Name = "lblError";
-            this.lblError.Size = new System.Drawing.Size(302, 38);
+            this.lblError.Size = new System.Drawing.Size(226, 29);
             this.lblError.TabIndex = 2;
             this.lblError.Text = "evtl. Fehlermeldung";
             // 
             // lblHeadPosition
             // 
             this.lblHeadPosition.AutoSize = true;
-            this.lblHeadPosition.Font = new System.Drawing.Font("Microsoft Sans Serif", 25.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblHeadPosition.Location = new System.Drawing.Point(13, 335);
+            this.lblHeadPosition.Font = new System.Drawing.Font("Microsoft Sans Serif", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHeadPosition.Location = new System.Drawing.Point(14, 606);
             this.lblHeadPosition.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblHeadPosition.Name = "lblHeadPosition";
-            this.lblHeadPosition.Size = new System.Drawing.Size(127, 52);
+            this.lblHeadPosition.Size = new System.Drawing.Size(110, 44);
             this.lblHeadPosition.TabIndex = 3;
             this.lblHeadPosition.Text = "Head";
             // 
