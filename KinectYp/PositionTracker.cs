@@ -18,10 +18,11 @@ namespace KinectYp {
         public event PunchEventHandler Punched;
         public event StayEventHandler Stay;
         public event PositionChangedEventHandler PositionChanged;
-        private SkeletonHistory skeletonHistory;
         private List<IErkenner> erkenners;
- 
 
+        private const int HistorySize = 30;
+        Skeleton[] HistorySkeletons = new Skeleton[HistorySize];
+        private long historyFramesAdded = 0;
 
         public PositionTracker() {
 
@@ -31,9 +32,11 @@ namespace KinectYp {
 
             //erkenner hizufügen
             erkenners = new List<IErkenner>();
+            erkenners.Add(new RechtsLaufen());
+            erkenners.Add(new LinksLaufen());
             erkenners.Add(new Punch());
 
-            skeletonHistory = new SkeletonHistory(30);
+  
             DiscoverSensor();
 
             if (_sensor == null) {
@@ -82,19 +85,22 @@ namespace KinectYp {
             }
 
             //Gibt ein Koerper
-            Skeleton first =  GetFirstSkeleton(e);
+            Skeleton first = GetFirstSkeleton(e);
+
+            UpdateHistory(first);
+
 
             if (first == null)
             {
                 return;
             }
-            skeletonHistory.Push(first);
 
-            if (skeletonHistory.IsReady())
+
+            if (HistorySkeletons.Last() != null)
             {
                 foreach (var erkenner in erkenners)
                 {
-                    if (erkenner.Preuefe(skeletonHistory))
+                    if (erkenner.Pruefe(HistorySkeletons))
                     {
                         Punched(this, erkenner.GetMessage());
                     }
@@ -106,18 +112,45 @@ namespace KinectYp {
             
         }
 
-        private Skeleton GetFirstSkeleton(AllFramesReadyEventArgs e) {
+
+
+        private Skeleton GetFirstSkeleton(AllFramesReadyEventArgs e)
+        {
             using (SkeletonFrame skeletonFrameData = e.OpenSkeletonFrame()) {
                 if (skeletonFrameData == null) {
                     return null;
                 }
+                Skeleton[] latestSkeletons = new Skeleton[_skeletonCount];
 
-                skeletonFrameData.CopySkeletonDataTo(_allSkeletons);
-                Skeleton first = _allSkeletons.FirstOrDefault(s => s.TrackingState == SkeletonTrackingState.Tracked);
+                skeletonFrameData.CopySkeletonDataTo(latestSkeletons);
+                Skeleton first = latestSkeletons.FirstOrDefault(s => s.TrackingState == SkeletonTrackingState.Tracked);
 
+                UpdateHistory(first);
 
                 return first;
             }
+        }
+
+        private void UpdateHistory(Skeleton latest)
+        {
+
+            Skeleton[] tempHistorySkeletons = new Skeleton[HistorySize];
+
+            for (int i = 1; i < HistorySkeletons.Length; i++)
+            {
+                if (HistorySkeletons[i - 1] != null)
+                {
+                    tempHistorySkeletons[i] = HistorySkeletons[i - 1];
+                }
+                
+            }
+
+            tempHistorySkeletons[0] = latest;
+
+            HistorySkeletons = tempHistorySkeletons;
+            historyFramesAdded++;
+
+
         }
     }
 }

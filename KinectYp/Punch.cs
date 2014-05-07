@@ -11,9 +11,11 @@ namespace KinectYp
     class Punch : IErkenner
     {
 
-        public bool Preuefe(SkeletonHistory history)
+        public bool Pruefe(Skeleton[] history)
         {
-            var rightFootZ = history.History.Select(x => x.Joints[JointType.FootRight].Position.Z);
+            System.Diagnostics.Debug.WriteLine("asdf");
+
+            var rightFootZ = history.Select(x => x.Joints[JointType.FootRight].Position.Z);
 
             return rightFootZ.Max() > rightFootZ.Min() + 0.5;
         }
