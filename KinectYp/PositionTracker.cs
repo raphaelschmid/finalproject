@@ -83,6 +83,11 @@ namespace KinectYp {
 
             //Gibt ein Koerper
             Skeleton first =  GetFirstSkeleton(e);
+
+            if (first == null)
+            {
+                return;
+            }
             skeletonHistory.Push(first);
 
             if (skeletonHistory.IsReady())
@@ -97,7 +102,7 @@ namespace KinectYp {
                 }
             }
             PositionChanged(this, first);
-
+            //asadd
             
         }
 

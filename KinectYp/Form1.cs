@@ -35,7 +35,6 @@ namespace KinectYp {
 
         private void PositionChanged(object sender, Skeleton s) {
 
-
             SkeletonPoint foot = s.Joints[JointType.FootRight].Position;
             SkeletonPoint head = s.Joints[JointType.Head].Position;
             lblFootPosition.Text = string.Format("X-Position: {0}{3}Y-Position: {1}{3}Z-Position: {2}", foot.X, foot.Y, foot.Z, Environment.NewLine);
