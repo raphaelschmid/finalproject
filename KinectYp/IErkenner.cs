@@ -10,7 +10,7 @@ namespace KinectYp
     interface IErkenner
     {
         bool Pruefe(Skeleton[] history);
-        string GetMessage();
+        string GetDebugName();
 
     }
 }

@@ -95,18 +95,21 @@ namespace KinectYp {
                 return;
             }
 
+            string display = "";
 
             if (HistorySkeletons.Last() != null)
             {
                 foreach (var erkenner in erkenners)
                 {
+                    display += erkenner.GetDebugName();
                     if (erkenner.Pruefe(HistorySkeletons))
                     {
-                        Punched(this, erkenner.GetMessage());
+                        display += "\tAKTIVIERT";
                     }
-
+                    display += "\n";
                 }
             }
+            Punched(this, display);
             PositionChanged(this, first);
             //asadd
             

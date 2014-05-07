@@ -21,9 +21,9 @@ namespace KinectYp
             return (rightFootZ.Max() > rightFootZ.First() + 0.5) && (rightFootY.First() > rightFootY.Min() + 0.2);
         }
 
-        public string GetMessage()
+        public string GetDebugName()
         {
-            return "Kick!";
+            return "Kick";
         }
     }
 }

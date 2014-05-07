@@ -18,7 +18,7 @@ namespace KinectYp
             return rightFootX.Min() + 0.3 < rightFootX.First() && (leftFootX.Max() - leftFootX.Min()) < 0.2;
         }
 
-        public string GetMessage()
+        public string GetDebugName()
         {
             return "nach rechts gelaufen";
         }
