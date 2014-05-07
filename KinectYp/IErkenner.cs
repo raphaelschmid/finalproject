@@ -12,5 +12,6 @@ namespace KinectYp
         bool Pruefe(Skeleton[] history);
         string GetDebugName();
 
+
     }
 }

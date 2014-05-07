@@ -18,7 +18,12 @@ namespace KinectYp
             var rightFootZ = history.Select(x => x.Joints[JointType.FootRight].Position.Z);
             var rightFootY = history.Select(x => x.Joints[JointType.FootRight].Position.Y);
 
-            return (rightFootZ.Max() > rightFootZ.First() + 0.5) && (rightFootY.First() > rightFootY.Min() + 0.2);
+            bool ok = (rightFootZ.Max() > rightFootZ.First() + 0.5) && (rightFootY.First() > rightFootY.Min() + 0.2);
+            if (ok)
+            {
+                MotionFunctions.SendAction(MotionFunctions.MKick());
+            }
+            return ok;
         }
 
         public string GetDebugName()
