@@ -22,6 +22,18 @@ namespace KinectYp {
         private const int HistorySize = 30;
         Skeleton[] HistorySkeletons = new Skeleton[HistorySize];
 
+        public class KinectNotConnectedException : Exception
+        {
+
+            public override string Message
+            {
+                get
+                {
+                    return "Sorry something went wrong with your Kinect. Probably its not connected.";
+                }
+            }
+        }
+
         public void Init() {
 
             //erkenner hizufügen
@@ -35,7 +47,6 @@ namespace KinectYp {
             DiscoverSensor();
 
             if (_sensor == null) {
-                // Todo: Throw an exception or something
                 throw new KinectNotConnectedException();
             }
 
