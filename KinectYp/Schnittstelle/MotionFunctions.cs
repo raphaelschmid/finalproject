@@ -55,7 +55,17 @@ namespace KinectYp
 
         public static String Down()
         {
-            return "db;" + tn + ";ub;" + tl + ";";
+            return DownDown() + tn + DownUp() + tl + ";";
+        }
+
+        public static String DownDown()
+        {
+            return "db;";
+        }
+
+        public static String DownUp()
+        {
+            return "ub;";
         }
 
         public static String MPunch()

@@ -23,13 +23,13 @@ namespace KinectYp
             if (geduckt && oben)
             {
                 geduckt = false;
-                MotionFunctions.SendAction(MotionFunctions.RightUp());
+                MotionFunctions.SendAction(MotionFunctions.DownUp());
                 return ErkennerStatus.nicht_aktiv;
             }
             if (!geduckt && unten)
             {
                 geduckt = true;
-                MotionFunctions.SendAction(MotionFunctions.RightDown());
+                MotionFunctions.SendAction(MotionFunctions.DownDown());
                 return ErkennerStatus.aktiv;
             }
             if (geduckt)
