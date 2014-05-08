@@ -34,7 +34,14 @@ namespace KinectYp
                 MotionFunctions.SendAction(MotionFunctions.LeftDown());
                 return ErkennerStatus.aktiv;
             }
-            return ErkennerStatus.error;
+            if (linksLaufend)
+            {
+                return ErkennerStatus.aktiv;
+            }
+            else
+            {
+                return ErkennerStatus.nicht_aktiv;
+            }
         }
         
 
