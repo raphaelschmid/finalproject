@@ -6,33 +6,31 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Kinect;
 
-namespace KinectYp.Erkenner.Bewegungen
+namespace KinectYp.Erkenner.SpezialAngriffe
 {
-    internal class Jump : ISinglePressErkenner
+    class RyuHadouken : ISinglePressErkenner
     {
-         public Jump()
+        public RyuHadouken()
         {
             Blocked = false;
             BlockDuration = 200;
-            SingeKeyPressKeys = MotionFunctions.Up();
+            SingeKeyPressKeys = MotionFunctions.Qfc() + MotionFunctions.MPunch();
         }
-
         public ErkennerStatus Pruefe(Skeleton[] history)
         {
-            var leftFootY = history.Select(x => x.Joints[JointType.FootRight].Position.Y);
-            var rightFootY = history.Select(x => x.Joints[JointType.FootRight].Position.Y);
-            var headY = history.Select(x => x.Joints[JointType.Head].Position.Y);
+            var rightHandZ = history.Select(x => x.Joints[JointType.HandRight].Position.Z);
+            var leftHandZ = history.Select(x => x.Joints[JointType.HandLeft].Position.Z);
 
-            Ok = (headY.First() - headY.Min() > Paramters.jumpSchwelle) &&
-                (leftFootY.First() - leftFootY.Min() > Paramters.jumpSchwelle) &&
-                (rightFootY.First() - rightFootY.Min() > Paramters.jumpSchwelle);
+            Ok = (rightHandZ.First() - rightHandZ.Min() > 0.1)
+                 && (leftHandZ.First() - leftHandZ.Min() > 0.1)
+                 && (leftHandZ.First() - leftHandZ.First() > 0.1);
 
             return ErkennerHandler.SinglePress(this);
         }
 
         public string GetDebugName()
         {
-            return "Jump";
+            return "hadouken";
         }
 
         public Stopwatch Stopwatch { get; set; }

@@ -13,7 +13,6 @@ namespace KinectYp
         public ErkennerStatus Pruefe(Skeleton[] history)
         {
             
-
             var rightFootX = history.Select(x => x.Joints[JointType.FootRight].Position.X);
             var leftFootX = history.Select(x => x.Joints[JointType.FootLeft].Position.X);
 
@@ -32,14 +31,7 @@ namespace KinectYp
                 MotionFunctions.SendAction(MotionFunctions.RightDown());
                 return ErkennerStatus.aktiv;
             }
-            if (rechtsLaufend)
-            {
-                return ErkennerStatus.aktiv;
-            }
-            else
-            {
-                return ErkennerStatus.nicht_aktiv;
-            }
+            return rechtsLaufend ? ErkennerStatus.aktiv : ErkennerStatus.nicht_aktiv;
         }
 
         public string GetDebugName()

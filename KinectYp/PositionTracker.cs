@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using KinectYp.Erkenner.Bewegungen;
 using Microsoft.Kinect;
 using System.Drawing;
 
@@ -43,13 +44,13 @@ namespace KinectYp {
             erkenners.Add(new Kick());
             erkenners.Add(new Punch());
             erkenners.Add(new Ducken());
+            erkenners.Add(new Jump());
   
             DiscoverSensor();
 
             if (_sensor == null) {
                 throw new KinectNotConnectedException();
             }
-
 
             //SmoothParameters
             var parameters = new TransformSmoothParameters {

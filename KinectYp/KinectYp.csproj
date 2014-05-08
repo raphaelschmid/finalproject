@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="Erkenner\Bewegungen\Ducken.cs" />
     <Compile Include="Erkenner\Bewegungen\Jump.cs" />
+    <Compile Include="Erkenner\SpezialAngriffe\RyuHadouken.cs" />
     <Compile Include="Schnittstelle\ErkennerHandler.cs" />
     <Compile Include="Erkenner\ErkennerStatus.cs" />
     <Compile Include="Form1.cs">
