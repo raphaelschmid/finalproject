@@ -7,9 +7,8 @@ using Microsoft.Kinect;
 
 namespace KinectYp
 {
-    class Ducken
+    class Ducken : IErkenner
     {
-
         private bool geduckt = false;
         public ErkennerStatus Pruefe(Skeleton[] history)
         {
@@ -18,8 +17,8 @@ namespace KinectYp
             var headY = history.Select(x => x.Joints[JointType.Head].Position.Y);
             var leftFootY = history.Select(x => x.Joints[JointType.FootLeft].Position.Y);
 
-            bool unten = headY.First() + 0.2 < headY.Max() && (Math.Abs(leftFootY.Max() - leftFootY.Min())) < 0.1;
-            bool oben = headY.First() + 0.2 < headY.Min() && (Math.Abs(leftFootY.Max() - leftFootY.Min())) < 0.1; ;
+            bool unten =  (headY.Max() - headY.First() > 0.1) && (leftFootY.Max() - leftFootY.Min()) < 0.03;
+            bool oben = (headY.First() - headY.Min() > 0.1) && (leftFootY.Max() - leftFootY.Min()) < 0.03; 
 
             if (geduckt && oben)
             {
