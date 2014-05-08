@@ -11,7 +11,6 @@ namespace KinectYp {
         private KinectSensor _sensor;
         bool _closing = false;
         private const int _skeletonCount = 6;
-        Skeleton[] _allSkeletons = new Skeleton[_skeletonCount];
         public delegate void PunchEventHandler(object sender, string message);
         public delegate void StayEventHandler(object sender);
         public delegate void PositionChangedEventHandler(object sender, Skeleton p);
@@ -22,11 +21,6 @@ namespace KinectYp {
 
         private const int HistorySize = 30;
         Skeleton[] HistorySkeletons = new Skeleton[HistorySize];
-        private long historyFramesAdded = 0;
-
-        public PositionTracker() {
-
-        }
 
         public void Init() {
 
@@ -102,18 +96,11 @@ namespace KinectYp {
             {
                 foreach (var erkenner in erkenners)
                 {
-                    display += erkenner.GetDebugName();
-                    if (erkenner.Pruefe(HistorySkeletons))
-                    {
-                        display += "\tAKTIVIERT";
-                    }
-                    display += "\n";
+                    display += erkenner.GetDebugName() + "\t" + erkenner.Pruefe(HistorySkeletons) + "\n";
                 }
             }
             Punched(this, display);
             PositionChanged(this, first);
-            //asadd
-            
         }
 
 
@@ -152,7 +139,6 @@ namespace KinectYp {
             tempHistorySkeletons[0] = latest;
 
             HistorySkeletons = tempHistorySkeletons;
-            historyFramesAdded++;
 
 
         }

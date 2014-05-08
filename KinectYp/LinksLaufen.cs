@@ -12,7 +12,7 @@ namespace KinectYp
     {
         private bool pressed = false;
 
-        public bool Pruefe(Skeleton[] history)
+        public ErkennerStatus Pruefe(Skeleton[] history)
         {
 
             

@@ -9,7 +9,7 @@ namespace KinectYp
 {
     class RechtsLaufen : IErkenner
     {
-        public bool Pruefe(Skeleton[] history)
+        public ErkennerStatus Pruefe(Skeleton[] history)
         {
 
             var rightFootX = history.Select(x => x.Joints[JointType.FootRight].Position.X);

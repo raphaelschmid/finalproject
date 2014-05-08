@@ -45,6 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ErkennerHandler.cs" />
+    <Compile Include="ErkennerStatus.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -52,6 +54,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="IErkenner.cs" />
+    <Compile Include="ISinglePressErkenner.cs" />
     <Compile Include="KinectNotConnectedException.cs" />
     <Compile Include="LinksLaufen.cs" />
     <Compile Include="MotionFunctions.cs" />
