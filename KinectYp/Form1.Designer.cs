@@ -32,11 +32,11 @@
             // lblKick
             // 
             this.lblKick.AutoSize = true;
-            this.lblKick.Font = new System.Drawing.Font("Microsoft Sans Serif", 22.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblKick.Font = new System.Drawing.Font("Consolas", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblKick.Location = new System.Drawing.Point(16, 9);
             this.lblKick.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblKick.Name = "lblKick";
-            this.lblKick.Size = new System.Drawing.Size(138, 44);
+            this.lblKick.Size = new System.Drawing.Size(105, 33);
             this.lblKick.TabIndex = 0;
             this.lblKick.Text = "normal";
             this.lblKick.Click += new System.EventHandler(this.lblKick_Click);

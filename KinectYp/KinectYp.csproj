@@ -45,28 +45,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Ducken.cs" />
-    <Compile Include="ErkennerHandler.cs" />
-    <Compile Include="ErkennerStatus.cs" />
+    <Compile Include="Erkenner\Bewegungen\Ducken.cs" />
+    <Compile Include="Schnittstelle\ErkennerHandler.cs" />
+    <Compile Include="Erkenner\ErkennerStatus.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="IErkenner.cs" />
-    <Compile Include="ISinglePressErkenner.cs" />
+    <Compile Include="Erkenner\IErkenner.cs" />
+    <Compile Include="Erkenner\ISinglePressErkenner.cs" />
     <Compile Include="KinectNotConnectedException.cs" />
-    <Compile Include="LinksLaufen.cs" />
-    <Compile Include="MotionFunctions.cs" />
-    <Compile Include="Paramters.cs" />
+    <Compile Include="Erkenner\Bewegungen\LinksLaufen.cs" />
+    <Compile Include="Schnittstelle\MotionFunctions.cs" />
+    <Compile Include="Erkenner\Paramters.cs" />
     <Compile Include="PositionTracker.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Action.cs" />
-    <Compile Include="Kick.cs" />
-    <Compile Include="Punch.cs" />
-    <Compile Include="RechtsLaufen.cs" />
+    <Compile Include="Erkenner\StandardAngriffe\Kick.cs" />
+    <Compile Include="Erkenner\StandardAngriffe\Punch.cs" />
+    <Compile Include="Erkenner\Bewegungen\RechtsLaufen.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

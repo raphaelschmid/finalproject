@@ -8,6 +8,7 @@ using Microsoft.Kinect;
 
 namespace KinectYp
 {
+
     public interface IErkenner
     {
         ErkennerStatus Pruefe(Skeleton[] history);
