@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using KinectYp.Erkenner.Bewegungen;
+using KinectYp.Erkenner.SpezialAngriffe;
 using Microsoft.Kinect;
 using System.Drawing;
 
@@ -45,6 +46,7 @@ namespace KinectYp {
             erkenners.Add(new Punch());
             erkenners.Add(new Ducken());
             erkenners.Add(new Jump());
+            erkenners.Add(new RyuHadouken());
   
             DiscoverSensor();
 
