@@ -22,12 +22,12 @@ namespace KinectYp
         public static double rlAndereFussLimite = 0.2;
 
         //////////////////////////
-        // jump
+        // Jump
         //////////////////////////
         public static double jumpSchwelle = 0.05;
 
         //////////////////////////
-        // ryu hadouken
+        // Ryu Hadouken
         //////////////////////////
         public static double rhWieWeitNachVorneMitDenHaenden = 0.3;
         public static double rhWieParallelDieHaendeSeinSollten = 0.5;
