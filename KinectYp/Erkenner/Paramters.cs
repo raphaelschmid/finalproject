@@ -26,5 +26,11 @@ namespace KinectYp
         //////////////////////////
         public static double jumpSchwelle = 0.05;
 
+        //////////////////////////
+        // ryu hadouken
+        //////////////////////////
+        public static double rhWieWeitNachVorneMitDenHaenden = 0.05;
+        public static double rhWieParallelDieHaendeSeinSollten = 0.05;
+
     }
 }

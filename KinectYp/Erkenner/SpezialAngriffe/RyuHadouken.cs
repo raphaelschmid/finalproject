@@ -21,9 +21,9 @@ namespace KinectYp.Erkenner.SpezialAngriffe
             var rightHandZ = history.Select(x => x.Joints[JointType.HandRight].Position.Z);
             var leftHandZ = history.Select(x => x.Joints[JointType.HandLeft].Position.Z);
 
-            Ok = (rightHandZ.First() - rightHandZ.Min() > 0.1)
-                 && (leftHandZ.First() - leftHandZ.Min() > 0.1)
-                 && (leftHandZ.First() - leftHandZ.First() > 0.1);
+            Ok = (rightHandZ.First() - rightHandZ.Min() > Paramters.rhWieWeitNachVorneMitDenHaenden)
+                 && (leftHandZ.First() - leftHandZ.Min() > Paramters.rhWieWeitNachVorneMitDenHaenden)
+                 && (leftHandZ.First() - leftHandZ.First() > Paramters.rhWieParallelDieHaendeSeinSollten);
 
             return ErkennerHandler.SinglePress(this);
         }
