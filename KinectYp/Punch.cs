@@ -13,7 +13,7 @@ namespace KinectYp
         public Punch()
         {
             Blocked = false;
-            BlockDuration = 500;
+            BlockDuration = 200;
             SingeKeyPressKeys = MotionFunctions.MPunch();
         }
 

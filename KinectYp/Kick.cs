@@ -14,7 +14,7 @@ namespace KinectYp
         public Kick()
         {
             Blocked = false;
-            BlockDuration = 800;
+            BlockDuration = 200;
             SingeKeyPressKeys = MotionFunctions.MKick();
         }
 
