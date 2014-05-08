@@ -48,7 +48,7 @@ namespace KinectYp
 
         public string GetDebugName()
         {
-            return "nach links gelaufen";
+            return "links laufen";
         }
     }
 }
