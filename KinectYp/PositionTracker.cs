@@ -20,6 +20,7 @@ namespace KinectYp {
         public event StayEventHandler Stay;
         public event PositionChangedEventHandler PositionChanged;
         private List<IErkenner> erkenners;
+        public bool normal;
 
         private const int HistorySize = 30;
         Skeleton[] HistorySkeletons = new Skeleton[HistorySize];
@@ -108,6 +109,7 @@ namespace KinectYp {
 
             if (HistorySkeletons.Last() != null)
             {
+
                 foreach (var erkenner in erkenners)
                 {
                     try
