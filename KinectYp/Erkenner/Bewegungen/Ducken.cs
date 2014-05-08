@@ -32,14 +32,7 @@ namespace KinectYp
                 MotionFunctions.SendAction(MotionFunctions.DownDown());
                 return ErkennerStatus.aktiv;
             }
-            if (geduckt)
-            {
-                return ErkennerStatus.aktiv;
-            }
-            else
-            {
-                return ErkennerStatus.nicht_aktiv;
-            }
+            return geduckt ? ErkennerStatus.aktiv : ErkennerStatus.nicht_aktiv;
         }
 
         public string GetDebugName()
