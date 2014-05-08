@@ -58,6 +58,7 @@
     <Compile Include="KinectNotConnectedException.cs" />
     <Compile Include="LinksLaufen.cs" />
     <Compile Include="MotionFunctions.cs" />
+    <Compile Include="Paramters.cs" />
     <Compile Include="PositionTracker.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

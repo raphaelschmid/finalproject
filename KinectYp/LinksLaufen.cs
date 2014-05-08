@@ -19,8 +19,8 @@ namespace KinectYp
             var rightFootX = history.Select(x => x.Joints[JointType.FootRight].Position.X);
             var leftFootX = history.Select(x => x.Joints[JointType.FootLeft].Position.X);
 
-            bool links = (leftFootX.First() + 0.2 < leftFootX.Max()) && ((rightFootX.Max() - rightFootX.Min()) < 0.2);
-            bool mitte = Math.Abs(rightFootX.First() - leftFootX.First()) < 0.3;
+            bool links = (leftFootX.First() + Paramters.rlAktivierungsSchwelle < leftFootX.Max()) && ((rightFootX.Max() - rightFootX.Min()) < Paramters.rlAndereFussLimite);
+            bool mitte = Math.Abs(rightFootX.First() - leftFootX.First()) < Paramters.rlMitteSchwellenwert;
 
             if (linksLaufend && mitte)
             {
