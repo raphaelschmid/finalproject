@@ -1,4 +1,4 @@
 namespace KinectYp
 {
-    public enum ErkennerStatus { blocked, aktiv, inaktiv };
+    public enum ErkennerStatus { blocked, aktiv, nicht_aktiv };
 }

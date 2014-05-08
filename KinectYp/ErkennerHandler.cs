@@ -16,7 +16,7 @@ namespace KinectYp
                 erkenner.Stopwatch.Stop();
                 erkenner.Stopwatch = null;
                 erkenner.Blocked = false;
-                return ErkennerStatus.inaktiv;
+                return ErkennerStatus.nicht_aktiv;
             }
 
             if (erkenner.Blocked)
@@ -32,8 +32,7 @@ namespace KinectYp
                 return ErkennerStatus.aktiv;
             }
 
-            return ErkennerStatus.inaktiv;
-
+            return ErkennerStatus.nicht_aktiv;
         }
     }
 }

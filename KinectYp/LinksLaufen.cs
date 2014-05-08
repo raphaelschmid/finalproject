@@ -10,7 +10,7 @@ namespace KinectYp
 {
     class LinksLaufen : IErkenner
     {
-        private bool pressed = false;
+        private bool linksLaufend = false;
 
         public ErkennerStatus Pruefe(Skeleton[] history)
         {
@@ -19,26 +19,24 @@ namespace KinectYp
             var rightFootX = history.Select(x => x.Joints[JointType.FootRight].Position.X);
             var leftFootX = history.Select(x => x.Joints[JointType.FootLeft].Position.X);
 
-            bool ok = (leftFootX.First() + 0.3 < leftFootX.Max()) && ((rightFootX.Max() - rightFootX.Min()) < 0.2);
+            bool links = (leftFootX.First() + 0.3 < leftFootX.Max()) && ((rightFootX.Max() - rightFootX.Min()) < 0.2);
+            bool mitte = Math.Abs(rightFootX.First() - leftFootX.First()) < 0.2;
 
-            if (!pressed)
+            if (linksLaufend && mitte)
             {
-                if (ok)
-                {
-                    pressed = true;
-                    return true;
-                }
+                linksLaufend = false;
+                MotionFunctions.SendAction(MotionFunctions.LeftUp());
+                return ErkennerStatus.nicht_aktiv;
             }
-            if (pressed)
+            if (!linksLaufend && links)
             {
-                if (!ok)
-                {
-                    pressed = false;
-                    return false;
-                }
+                linksLaufend = true;
+                MotionFunctions.SendAction(MotionFunctions.LeftDown());
+                return ErkennerStatus.aktiv;
             }
-            return ok;
         }
+        
+
 
         public string GetDebugName()
         {

@@ -24,12 +24,28 @@ namespace KinectYp
 
         public static String Left()
         {
-            return "dg;" + tn + ";ug;" + tl + ";";
+            return LeftDown() + tn + ";" + LeftUp() + tl + ";";
         }
-
+        public static String LeftDown()
+        {
+            return "dg;";
+        }
+        public static String LeftUp()
+        {
+            return "ug;";
+        }
         public static String Right()
         {
-            return "dh;" + tn + ";uh;" + tl + ";";
+            return RightDown() + tn + ";" + RightUp() + tl + ";";
+        }
+
+        public static String RightDown()
+        {
+            return "dh;";
+        }
+        public static String RightUp()
+        {
+            return "uh;";
         }
 
         public static String Up()
