@@ -13,7 +13,7 @@ namespace KinectYp.Erkenner.SpezialAngriffe
         public RyuHadouken()
         {
             Blocked = false;
-            BlockDuration = 200;
+            BlockDuration = 1000;
             SingeKeyPressKeys = MotionFunctions.Qfc() + MotionFunctions.MPunch();
         }
         public ErkennerStatus Pruefe(Skeleton[] history)
@@ -21,9 +21,9 @@ namespace KinectYp.Erkenner.SpezialAngriffe
             var rightHandZ = history.Select(x => x.Joints[JointType.HandRight].Position.Z);
             var leftHandZ = history.Select(x => x.Joints[JointType.HandLeft].Position.Z);
 
-            Ok = (rightHandZ.First() - rightHandZ.Min() > Paramters.rhWieWeitNachVorneMitDenHaenden)
-                 && (leftHandZ.First() - leftHandZ.Min() > Paramters.rhWieWeitNachVorneMitDenHaenden)
-                 && (leftHandZ.First() - leftHandZ.First() > Paramters.rhWieParallelDieHaendeSeinSollten);
+            Ok = (rightHandZ.Max() - rightHandZ.First()  > Paramters.rhWieWeitNachVorneMitDenHaenden)
+                 && (leftHandZ.Max() - leftHandZ.First() > Paramters.rhWieWeitNachVorneMitDenHaenden)
+                 && (leftHandZ.First() - leftHandZ.First() < Paramters.rhWieParallelDieHaendeSeinSollten);
 
             return ErkennerHandler.SinglePress(this);
         }

@@ -29,8 +29,8 @@ namespace KinectYp
         //////////////////////////
         // Ryu Hadouken
         //////////////////////////
-        public static double rhWieWeitNachVorneMitDenHaenden = 0.3;
-        public static double rhWieParallelDieHaendeSeinSollten = 0.5;
+        public static double rhWieWeitNachVorneMitDenHaenden = 0.2;
+        public static double rhWieParallelDieHaendeSeinSollten = 0.1;
 
     }
 }

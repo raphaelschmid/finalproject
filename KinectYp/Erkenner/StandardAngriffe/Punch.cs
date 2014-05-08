@@ -22,8 +22,9 @@ namespace KinectYp
             var rightHandZ    = history.Select(x => x.Joints[JointType.HandRight].Position.Z);
             var rightHandY    = history.Select(x => x.Joints[JointType.HandRight].Position.Y);
             var leftShoulderY = history.Select(x => x.Joints[JointType.ShoulderLeft].Position.Y);
+            var leftHandZ     = history.Select(x => x.Joints[JointType.HandLeft].Position.Z);
 
-            Ok = (rightHandZ.First() < rightHandZ.Max() - 0.27) && (rightHandY.First() < leftShoulderY.First() + 0.1);
+            Ok = (rightHandZ.First() < rightHandZ.Max() - 0.27) && (rightHandY.First() < leftShoulderY.First() + 0.1) && (leftHandZ.Max() - leftHandZ.First() < 0.15);
 
             return ErkennerHandler.SinglePress(this);
         }

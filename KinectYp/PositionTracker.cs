@@ -110,7 +110,15 @@ namespace KinectYp {
             {
                 foreach (var erkenner in erkenners)
                 {
-                    display += erkenner.GetDebugName().PadRight(20) + erkenner.Pruefe(HistorySkeletons) + "\n";
+                    try
+                    {
+                        display += erkenner.GetDebugName().PadRight(20) + erkenner.Pruefe(HistorySkeletons) + "\n";
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.ToString());
+                    }
+                    
                 }
             }
             Punched(this, display);
