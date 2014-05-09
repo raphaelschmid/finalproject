@@ -10,7 +10,7 @@ namespace KinectYp
 {
     class MotionFunctions
     {
-         static int tn = 50;
+        static int tn = 50;
         static int tl = 70;
 
         public static void SendAction(string action)
