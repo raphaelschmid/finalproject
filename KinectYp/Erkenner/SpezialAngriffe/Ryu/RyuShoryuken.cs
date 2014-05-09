@@ -13,7 +13,7 @@ namespace KinectYp.Erkenner.SpezialAngriffe
         public RyuShoryuken()
         {
             Blocked = false;
-            BlockDuration = 1000;
+            BlockDuration = 400;
             SingeKeyPressKeys = MotionFunctions.Right() + MotionFunctions.Qfc() + MotionFunctions.MPunch(); ;
         }
 

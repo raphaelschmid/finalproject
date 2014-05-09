@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using KinectYp.Erkenner;
 using KinectYp.Erkenner.Bewegungen;
 
 namespace KinectYp
@@ -18,7 +19,7 @@ namespace KinectYp
                 erkenner.Stopwatch.Stop();
                 erkenner.Stopwatch = null;
                 erkenner.Blocked = false;
-                return ErkennerStatus.nicht_aktiv;
+                
 
                 foreach (var e in Form1.positionTracker.erkenners)
                 {
@@ -28,11 +29,15 @@ namespace KinectYp
                         {
                             if (ee.GetDebugName().Equals("Ducken"))
                             {
-                                ee.blocked = true;
+                                IBlockableErkenner DuckenErkenner = (IBlockableErkenner) ee;
+                                DuckenErkenner.Blocked = true;
+                                DuckenErkenner.BlockStopwatch = Stopwatch.StartNew();
+
                             }
                         }
                     }
                 }
+                return ErkennerStatus.nicht_aktiv;
             }
 
             if (erkenner.Blocked)

@@ -24,7 +24,7 @@ namespace KinectYp
         //////////////////////////
         // Jump
         //////////////////////////
-        public static double jumpSchwelle = 0.1;
+        public static double jumpSchwelle = 0.08;
 
         //////////////////////////
         // Ryu Hadouken

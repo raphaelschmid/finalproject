@@ -33,6 +33,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Kinect, Version=1.8.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.Speech, Version=11.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Windows\assembly\GAC_MSIL\Microsoft.Speech\11.0.0.0__31bf3856ad364e35\Microsoft.Speech.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -47,6 +51,7 @@
   <ItemGroup>
     <Compile Include="Erkenner\Bewegungen\Ducken.cs" />
     <Compile Include="Erkenner\Bewegungen\Jump.cs" />
+    <Compile Include="Erkenner\IBlockableErkenner.cs" />
     <Compile Include="Erkenner\SpezialAngriffe\Ryu\RyuHadouken.cs" />
     <Compile Include="Erkenner\SpezialAngriffe\Ryu\RyuShoryuken.cs" />
     <Compile Include="Schnittstelle\ErkennerHandler.cs" />
@@ -68,6 +73,7 @@
     <Compile Include="Erkenner\StandardAngriffe\Kick.cs" />
     <Compile Include="Erkenner\StandardAngriffe\Punch.cs" />
     <Compile Include="Erkenner\Bewegungen\RechtsLaufen.cs" />
+    <Compile Include="SprachErkenner\Sprache.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -94,6 +100,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="SprachErkenner\SpeechGrammar.xml" />
     <Content Include="UDPServer.java" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

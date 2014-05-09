@@ -34,7 +34,6 @@ namespace KinectYp.Erkenner.Bewegungen
             return "Jump";
         }
 
-
         public Stopwatch Stopwatch { get; set; }
         public bool Blocked { get; set; }
         public int BlockDuration { get; private set; }

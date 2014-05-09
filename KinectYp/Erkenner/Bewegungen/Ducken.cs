@@ -4,12 +4,18 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using KinectYp.Erkenner;
 using Microsoft.Kinect;
 
 namespace KinectYp
 {
-    class Ducken : IErkenner
+    class Ducken : IBlockableErkenner
     {
+        public Ducken()
+        {
+            Blocked = false;
+
+        }
         private bool geduckt = false;
         public ErkennerStatus Pruefe(Skeleton[] history)
         {
@@ -21,20 +27,34 @@ namespace KinectYp
 
 
             bool unten = (headY.Max() - headY.First() > 0.15) && (leftFootY.First() - leftFootY.Min()) < 0.02;
-            bool oben = (headY.First() - headY.Min() > 0.1) && (leftFootY.Max()-leftFootY.First()) < 0.02; 
+            bool oben = (headY.First() - headY.Min() > 0.1) && (leftFootY.Max()-leftFootY.First()) < 0.02;
 
-            if (geduckt && oben)
+            if (Blocked)
             {
-                geduckt = false;
-                MotionFunctions.SendAction(MotionFunctions.DownUp());
-                return ErkennerStatus.nicht_aktiv;
+                if (BlockStopwatch.ElapsedMilliseconds > 700)
+                {
+                    Blocked = false;
+                    BlockStopwatch = null;
+                }
             }
-            if (!geduckt && unten)
+
+
+            if (!Blocked)
             {
-                geduckt = true;
-                MotionFunctions.SendAction(MotionFunctions.DownDown());
-                return ErkennerStatus.aktiv;
+                if (geduckt && oben)
+                {
+                    geduckt = false;
+                    MotionFunctions.SendAction(MotionFunctions.DownUp());
+                    return ErkennerStatus.nicht_aktiv;
+                }
+                if (!geduckt && unten)
+                {
+                    geduckt = true;
+                    MotionFunctions.SendAction(MotionFunctions.DownDown());
+                    return ErkennerStatus.aktiv;
+                }
             }
+            
             return geduckt ? ErkennerStatus.aktiv : ErkennerStatus.nicht_aktiv;
         }
 
@@ -42,5 +62,8 @@ namespace KinectYp
         {
             return "Ducken";
         }
+
+        public Stopwatch BlockStopwatch { get; set; }
+        public bool Blocked { get; set; }
     }
 }

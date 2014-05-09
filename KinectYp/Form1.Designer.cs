@@ -27,6 +27,7 @@
             this.lblFootPosition = new System.Windows.Forms.Label();
             this.lblError = new System.Windows.Forms.Label();
             this.lblHeadPosition = new System.Windows.Forms.Label();
+            this.lblNormal = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // lblKick
@@ -36,9 +37,9 @@
             this.lblKick.Location = new System.Drawing.Point(16, 9);
             this.lblKick.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblKick.Name = "lblKick";
-            this.lblKick.Size = new System.Drawing.Size(105, 33);
+            this.lblKick.Size = new System.Drawing.Size(120, 33);
             this.lblKick.TabIndex = 0;
-            this.lblKick.Text = "normal";
+            this.lblKick.Text = "Ausgabe";
             this.lblKick.Click += new System.EventHandler(this.lblKick_Click);
             // 
             // lblFootPosition
@@ -74,11 +75,23 @@
             this.lblHeadPosition.TabIndex = 3;
             this.lblHeadPosition.Text = "Head";
             // 
+            // lblNormal
+            // 
+            this.lblNormal.AutoSize = true;
+            this.lblNormal.Font = new System.Drawing.Font("Consolas", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblNormal.Location = new System.Drawing.Point(19, 337);
+            this.lblNormal.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblNormal.Name = "lblNormal";
+            this.lblNormal.Size = new System.Drawing.Size(105, 33);
+            this.lblNormal.TabIndex = 4;
+            this.lblNormal.Text = "normal";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(948, 883);
+            this.Controls.Add(this.lblNormal);
             this.Controls.Add(this.lblHeadPosition);
             this.Controls.Add(this.lblError);
             this.Controls.Add(this.lblFootPosition);
@@ -98,6 +111,7 @@
         private System.Windows.Forms.Label lblFootPosition;
         private System.Windows.Forms.Label lblError;
         private System.Windows.Forms.Label lblHeadPosition;
+        private System.Windows.Forms.Label lblNormal;
     }
 }
 

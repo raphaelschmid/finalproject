@@ -99,6 +99,9 @@ namespace KinectYp {
                 System.Threading.Thread.Sleep(100);
             }
         }
-   
+        public void setlblNormal(string s)
+        {
+            lblNormal.Text = s;
+        }
     }
 }
