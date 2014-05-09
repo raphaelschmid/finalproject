@@ -12,9 +12,11 @@ class UDPServer
     public static void main(String args[]) throws Exception {
         robot = new Robot();
         DatagramSocket serverSocket = new DatagramSocket(9876);
-        byte[] receiveData = new byte[1024];
-        byte[] sendData;
+
+
         while (true) {
+            byte[] receiveData = new byte[1024];
+            byte[] sendData;
             DatagramPacket receivePacket = new DatagramPacket(receiveData, receiveData.length);
             serverSocket.receive(receivePacket);
             String sentence = new String(receivePacket.getData());
