@@ -1,4 +1,5 @@
-﻿using Microsoft.Kinect;
+﻿using System.Diagnostics;
+using Microsoft.Kinect;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -28,7 +29,7 @@ namespace KinectYp {
             positionTracker.PositionChanged += PositionChanged;
             lblKick.Text = "normal";
 
-
+            staarteStreetFighter();
         }
 
         private void Stay(object sender)
@@ -62,6 +63,36 @@ namespace KinectYp {
         private void Form1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        static void staarteStreetFighter()
+        {
+            Process.Start("C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\Games\\Street Fighter Alpha 2.lnk");
+            System.Threading.Thread.Sleep(5000);
+            MotionFunctions.SendAction(MotionFunctions.LKick());
+            System.Threading.Thread.Sleep(2000);
+
+            // select training
+            MotionFunctions.SendAction("d2;100;u2;");
+            System.Threading.Thread.Sleep(200);
+            MotionFunctions.SendAction("d2;100;u2;");
+            System.Threading.Thread.Sleep(200);
+            MotionFunctions.SendAction(MotionFunctions.LKick());
+            System.Threading.Thread.Sleep(1000);
+
+            //ryu vs ryu
+            MotionFunctions.SendAction(MotionFunctions.LKick());
+            System.Threading.Thread.Sleep(50);
+            MotionFunctions.SendAction(MotionFunctions.LKick());
+            System.Threading.Thread.Sleep(1000);
+
+            // start game
+
+            for (int i = 0; i < 20; i++)
+            {
+                MotionFunctions.SendAction(MotionFunctions.LKick());
+                System.Threading.Thread.Sleep(100);
+            }
         }
    
     }

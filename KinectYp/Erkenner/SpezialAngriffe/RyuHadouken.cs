@@ -13,7 +13,7 @@ namespace KinectYp.Erkenner.SpezialAngriffe
         public RyuHadouken()
         {
             Blocked = false;
-            BlockDuration = 1000;
+            BlockDuration = 800;
             SingeKeyPressKeys = MotionFunctions.Qfc() + MotionFunctions.MPunch();
         }
         public ErkennerStatus Pruefe(Skeleton[] history)
