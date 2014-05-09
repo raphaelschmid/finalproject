@@ -6,33 +6,34 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Kinect;
 
-namespace KinectYp
+namespace KinectYp.Erkenner.SpezialAngriffe
 {
-    class Punch : ISinglePressErkenner
+    class RyuShoryuken : ISinglePressErkenner
     {
-        public Punch()
+        public RyuShoryuken()
         {
             Blocked = false;
-            BlockDuration = 200;
-            SingeKeyPressKeys = MotionFunctions.MPunch();
+            BlockDuration = 1000;
+            SingeKeyPressKeys = MotionFunctions.Right() + MotionFunctions.Qfc() + MotionFunctions.MPunch(); ;
         }
 
         public ErkennerStatus Pruefe(Skeleton[] history)
         {
-            var leftHandZ    = history.Select(x => x.Joints[JointType.HandLeft].Position.Z);
-            var leftHandY    = history.Select(x => x.Joints[JointType.HandLeft].Position.Y);
+            var rightHandY    = history.Select(x => x.Joints[JointType.HandRight].Position.Y);
+            var rightHandX = history.Select(x => x.Joints[JointType.HandRight].Position.X);
+            var headX = history.Select(x => x.Joints[JointType.Head].Position.X);
             var leftShoulderY = history.Select(x => x.Joints[JointType.ShoulderLeft].Position.Y);
-            var rightHandZ     = history.Select(x => x.Joints[JointType.HandRight].Position.Z);
 
-            Ok = (leftHandZ.First() < leftHandZ.Max() - 0.27) && (leftHandY.First() < leftShoulderY.First() + 0.1) && (rightHandZ.Max() - rightHandZ.First() < 0.15);
+            Ok = (rightHandX.First() < rightHandX.Max() - 0.2) && (rightHandY.First() > leftShoulderY.First()) && (rightHandX.First() < headX.First() - 0.2);
 
             return ErkennerHandler.SinglePress(this);
         }
 
         public string GetDebugName()
         {
-            return "Punch";
+            return "Shoryuken";
         }
+
 
         public Stopwatch Stopwatch { get; set; }
         public bool Blocked { get; set; }

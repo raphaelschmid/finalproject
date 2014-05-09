@@ -4,11 +4,13 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using KinectYp.Erkenner.Bewegungen;
 
 namespace KinectYp
 {
     public static class ErkennerHandler
     {
+
         public static ErkennerStatus SinglePress(ISinglePressErkenner erkenner)
         {
             if (erkenner.Stopwatch != null && erkenner.Stopwatch.ElapsedMilliseconds > erkenner.BlockDuration)
@@ -17,6 +19,20 @@ namespace KinectYp
                 erkenner.Stopwatch = null;
                 erkenner.Blocked = false;
                 return ErkennerStatus.nicht_aktiv;
+
+                foreach (var e in Form1.positionTracker.erkenners)
+                {
+                    if (e.GetDebugName().Equals("Jump"))
+                    {
+                        foreach (var ee in Form1.positionTracker.erkenners)
+                        {
+                            if (ee.GetDebugName().Equals("Ducken"))
+                            {
+                                ee.blocked = true;
+                            }
+                        }
+                    }
+                }
             }
 
             if (erkenner.Blocked)

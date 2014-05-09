@@ -13,5 +13,6 @@ namespace KinectYp
     {
         ErkennerStatus Pruefe(Skeleton[] history);
         string GetDebugName();
+
     }
 }

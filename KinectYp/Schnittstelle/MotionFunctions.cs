@@ -10,8 +10,7 @@ namespace KinectYp
 {
     class MotionFunctions
     {
-        static int tn = 50;
-        static int tl = 70;
+        static int t = 50;
 
         public static void SendAction(string action)
         {
@@ -24,7 +23,7 @@ namespace KinectYp
 
         public static String Left()
         {
-            return LeftDown() + tn + ";" + LeftUp() + tl + ";";
+            return LeftDown() + t + ";" + LeftUp() + t + ";";
         }
         public static String LeftDown()
         {
@@ -36,7 +35,7 @@ namespace KinectYp
         }
         public static String Right()
         {
-            return RightDown() + tn + ";" + RightUp() + tl + ";";
+            return RightDown() + t + ";" + RightUp() + t + ";";
         }
 
         public static String RightDown()
@@ -50,12 +49,12 @@ namespace KinectYp
 
         public static String Up()
         {
-            return "dz;" + tn + ";uz;" + tl + ";";
+            return "dz;" + t + ";uz;" + t + ";";
         }
 
         public static String Down()
         {
-            return DownDown() + tn + DownUp() + tl + ";";
+            return DownDown() + t + DownUp() + t + ";";
         }
 
         public static String DownDown()
@@ -70,72 +69,72 @@ namespace KinectYp
 
         public static String MPunch()
         {
-            return "ds;" + tn + ";us;" + tl + ";";
+            return "ds;" + t + ";us;" + t + ";";
         }
 
         public static String LPunch()
         {
-            return "da;" + tn + ";ua;" + tl + ";";
+            return "da;" + t + ";ua;" + t + ";";
         }
 
         public static String HPunch()
         {
-            return "dd;" + tn + ";ud;" + tl + ";";
+            return "dd;" + t + ";ud;" + t + ";";
         }
 
         public static String TripplePunch()
         {
-            return "dq;" + tn + ";uq;" + tl + ";";
+            return "dq;" + t + ";uq;" + t + ";";
         }
 
         public static String MKick()
         {
-            return "dx;" + tn + ";ux;" + tl + ";";
+            return "dx;" + t + ";ux;" + t + ";";
         }
 
         public static String LKick()
         {
-            return "dy;" + tn + ";uy;" + tl + ";";
+            return "dy;" + t + ";uy;" + t + ";";
         }
 
         public static String HKick()
         {
-            return "dc;" + tn + ";uc;" + tl + ";";
+            return "dc;" + t + ";uc;" + t + ";";
         }
 
         public static String TrippleKick()
         {
-            return "de;" + tn + ";ue;" + tl + ";";
+            return "de;" + t + ";ue;" + t + ";";
         }
 
         public static String Qfc()
         {
-            return "db;" + tn + ";dh;" + tn + ";ub;" + tn + ";uh;" + tl + ";";
+            return "db;" + t + ";dh;" + t + ";ub;" + t + ";uh;" + t + ";";
         }
 
         public static String Qbc()
         {
-            return "db;" + tn + ";dg;" + tn + ";ub;" + tn + ";ug;" + tl + ";";
+            return "db;" + t + ";dg;" + t + ";ub;" + t + ";ug;" + t + ";";
         }
 
         public static String HalfCircle()
         {
-            return "dg;" + tn + ";db;" + tn + ";ug;" + tn + ";dh;" + tn + ";ub;" + tn + ";uh;" + tl + ";";
+            return "dg;" + t + ";db;" + t + ";ug;" + t + ";dh;" + t + ";ub;" + t + ";uh;" + t + ";";
         }
 
         public static String FullCircle()
         {
-            return "dh;" + tn + ";db;" + tn + ";uh;" + tn + ";dg;" + tn + ";ub;" + tn + ";dz;" + tn + ";ug;" + tn + ";dh;" + tn + ";uz;" + tn + ";uh;" + tl + ";";
+            return "dh;" + t + ";db;" + t + ";uh;" + t + ";dg;" + t + ";ub;" + t + ";dz;" + t + ";ug;" + t + ";dh;" + t + ";uz;" + t + ";uh;" + t + ";";
         }
 
         public static String ForwardZ()
         {
-            return "dh;" + tn + ";uh;" + tn + ";db;" + tn + ";dh;" + tn + ";ub;" + tn + ";uh;" + tl + ";";
+            return "dh;" + t + ";uh;" + t + ";db;" + t + ";dh;" + t + ";ub;" + t + ";uh;" + t + ";";
         }
 
         public static String BackwardZ()
         {
-            return "dg;" + tn + ";ug;" + tn + ";db;" + tn + ";dg;" + tn + ";ub;" + tn + ";ug;" + tl + ";";
+            return "dg;" + t + ";ug;" + t + ";db;" + t + ";dg;" + t + ";ub;" + t + ";ug;" + t + ";";
         }
     }
 }

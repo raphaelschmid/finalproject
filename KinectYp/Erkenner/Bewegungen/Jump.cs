@@ -19,12 +19,11 @@ namespace KinectYp.Erkenner.Bewegungen
 
         public ErkennerStatus Pruefe(Skeleton[] history)
         {
-            var leftFootY = history.Select(x => x.Joints[JointType.FootRight].Position.Y);
+            var leftFootY = history.Select(x => x.Joints[JointType.FootLeft].Position.Y);
             var rightFootY = history.Select(x => x.Joints[JointType.FootRight].Position.Y);
-            var headY = history.Select(x => x.Joints[JointType.Head].Position.Y);
+            //var headY = history.Select(x => x.Joints[JointType.Head].Position.Y);
 
-            Ok = (headY.First() - headY.Min() > Paramters.jumpSchwelle) &&
-                (leftFootY.First() - leftFootY.Min() > Paramters.jumpSchwelle) &&
+            Ok = (leftFootY.First() - leftFootY.Min()> Paramters.jumpSchwelle) &&
                 (rightFootY.First() - rightFootY.Min() > Paramters.jumpSchwelle);
 
             return ErkennerHandler.SinglePress(this);
@@ -34,6 +33,7 @@ namespace KinectYp.Erkenner.Bewegungen
         {
             return "Jump";
         }
+
 
         public Stopwatch Stopwatch { get; set; }
         public bool Blocked { get; set; }

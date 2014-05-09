@@ -19,7 +19,7 @@ namespace KinectYp {
         public event PunchEventHandler Punched;
         public event StayEventHandler Stay;
         public event PositionChangedEventHandler PositionChanged;
-        private List<IErkenner> erkenners;
+        public List<IErkenner> erkenners;
         public bool normal;
 
         private const int HistorySize = 30;
@@ -48,6 +48,7 @@ namespace KinectYp {
             erkenners.Add(new Ducken());
             erkenners.Add(new Jump());
             erkenners.Add(new RyuHadouken());
+            erkenners.Add(new RyuShoryuken());
   
             DiscoverSensor();
 

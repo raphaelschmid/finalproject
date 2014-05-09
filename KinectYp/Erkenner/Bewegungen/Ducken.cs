@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,8 +18,10 @@ namespace KinectYp
             var headY = history.Select(x => x.Joints[JointType.Head].Position.Y);
             var leftFootY = history.Select(x => x.Joints[JointType.FootLeft].Position.Y);
 
-            bool unten =  (headY.Max() - headY.First() > 0.1) && (leftFootY.Max() - leftFootY.Min()) < 0.03;
-            bool oben = (headY.First() - headY.Min() > 0.1) && (leftFootY.Max() - leftFootY.Min()) < 0.03; 
+
+
+            bool unten = (headY.Max() - headY.First() > 0.15) && (leftFootY.First() - leftFootY.Min()) < 0.02;
+            bool oben = (headY.First() - headY.Min() > 0.1) && (leftFootY.Max()-leftFootY.First()) < 0.02; 
 
             if (geduckt && oben)
             {
@@ -37,7 +40,7 @@ namespace KinectYp
 
         public string GetDebugName()
         {
-            return "geduckt";
+            return "Ducken";
         }
     }
 }
