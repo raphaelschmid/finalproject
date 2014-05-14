@@ -276,7 +276,7 @@ namespace KinectYp {
             {
                 switch (e.Result.Semantics.Value.ToString())
                 {
-                    case "CHANGE":
+                    case "SWITCH":
                         if (normal)
                         {
                             normal = false;

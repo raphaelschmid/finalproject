@@ -2,14 +2,9 @@
   <rule id="rootRule">
     <one-of>
       <item>
-        <tag>CHANGE</tag>
+        <tag>SWITCH</tag>
         <one-of>
-          <item> turn </item>
-          <item> changes </item>
-          <item> change </item>
-          <item> opposite </item>
-          <item> changing </item>
-          <item> turning </item>
+          <item> switch </item>
         </one-of>
       </item>
     </one-of>

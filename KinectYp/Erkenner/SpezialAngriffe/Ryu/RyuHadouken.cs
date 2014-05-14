@@ -21,6 +21,7 @@ namespace KinectYp.Erkenner.SpezialAngriffe
             var rightHandZ = history.Select(x => x.Joints[JointType.HandRight].Position.Z);
             var leftHandZ = history.Select(x => x.Joints[JointType.HandLeft].Position.Z);
 
+            
             Ok = (rightHandZ.Max() - rightHandZ.First()  > Paramters.rhWieWeitNachVorneMitDenHaenden)
                  && (leftHandZ.Max() - leftHandZ.First() > Paramters.rhWieWeitNachVorneMitDenHaenden)
                  && (leftHandZ.First() - leftHandZ.First() < Paramters.rhWieParallelDieHaendeSeinSollten);
@@ -37,6 +38,23 @@ namespace KinectYp.Erkenner.SpezialAngriffe
         public bool Blocked { get; set; }
         public int BlockDuration { get; private set; }
         public bool Ok { get; private set; }
-        public string SingeKeyPressKeys { get; private set; }
+
+        private string _SingeKeyPressKeys;
+        public string SingeKeyPressKeys
+        {
+            get
+            {
+                if (Form1.positionTracker.normal)
+                {
+                    return MotionFunctions.Qfc() + MotionFunctions.MPunch();
+                }
+                else
+                {
+                    return MotionFunctions.Qbc() + MotionFunctions.MPunch();
+                }
+                
+            }
+            set { _SingeKeyPressKeys = value; }
+        }
     }
 }

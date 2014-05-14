@@ -82,9 +82,9 @@
             this.lblNormal.Location = new System.Drawing.Point(19, 337);
             this.lblNormal.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNormal.Name = "lblNormal";
-            this.lblNormal.Size = new System.Drawing.Size(105, 33);
+            this.lblNormal.Size = new System.Drawing.Size(75, 33);
             this.lblNormal.TabIndex = 4;
-            this.lblNormal.Text = "normal";
+            this.lblNormal.Text = "true";
             // 
             // Form1
             // 

@@ -14,7 +14,7 @@ namespace KinectYp.Erkenner.SpezialAngriffe
         {
             Blocked = false;
             BlockDuration = 400;
-            SingeKeyPressKeys = MotionFunctions.Right() + MotionFunctions.Qfc() + MotionFunctions.MPunch(); ;
+            SingeKeyPressKeys = MotionFunctions.Right() + MotionFunctions.Qfc() + MotionFunctions.MPunch();
         }
 
         public ErkennerStatus Pruefe(Skeleton[] history)
@@ -39,6 +39,22 @@ namespace KinectYp.Erkenner.SpezialAngriffe
         public bool Blocked { get; set; }
         public int BlockDuration { get; private set; }
         public bool Ok { get; private set; }
-        public string SingeKeyPressKeys { get; private set; }
+        private string _SingeKeyPressKeys;
+        public string SingeKeyPressKeys
+        {
+            get
+            {
+                if (Form1.positionTracker.normal)
+                {
+                    return MotionFunctions.Right() + MotionFunctions.Qfc() + MotionFunctions.MPunch();
+                }
+                else
+                {
+                    return MotionFunctions.Left() + MotionFunctions.Qbc() + MotionFunctions.MPunch();
+                }
+
+            }
+            set { _SingeKeyPressKeys = value; }
+        }
     }
 }

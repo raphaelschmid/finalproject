@@ -19,7 +19,7 @@ namespace KinectYp
         public static double rlAktivierungsSchwelle = 0.2;
 
         // Um wie viel der andere Fuss sich höchstens bewegen darf
-        public static double rlAndereFussLimite = 0.2;
+        public static double rlAndereFussLimite = 0.1;
 
         //////////////////////////
         // Jump
