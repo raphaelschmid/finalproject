@@ -67,7 +67,7 @@ namespace KinectYp {
             if (null != ri)
             {
 
-                this.speechEngine = new SpeechRecognitionEngine(ri.Id);
+                speechEngine = new SpeechRecognitionEngine(ri.Id);
 
                 /****************************************************************
                 * 

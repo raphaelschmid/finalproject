@@ -73,7 +73,6 @@
     <Compile Include="Erkenner\StandardAngriffe\Kick.cs" />
     <Compile Include="Erkenner\StandardAngriffe\Punch.cs" />
     <Compile Include="Erkenner\Bewegungen\RechtsLaufen.cs" />
-    <Compile Include="SprachErkenner\Sprache.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
