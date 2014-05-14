@@ -62,6 +62,28 @@ namespace KinectYp {
                 throw new KinectNotConnectedException();
             }
 
+
+
+            //SmoothParameters
+            var parameters = new TransformSmoothParameters {
+                Smoothing = 0.3f,
+                Correction = 0.0f,
+                Prediction = 0.0f,
+                JitterRadius = 1.0f,
+                MaxDeviationRadius = 0.5f
+            };
+
+            // Alle Funktionen aktivieren
+            _sensor.SkeletonStream.Enable();
+            _sensor.AllFramesReady += new EventHandler<AllFramesReadyEventArgs>(KinectAllFramesReady);
+
+            try {
+                _sensor.Start();
+            }
+            catch (IOException) {
+                // Kinect wird bereits von einer anderen Anwendung verwendet
+                
+            }
             RecognizerInfo ri = GetKinectRecognizer();
 
             if (null != ri)
@@ -107,27 +129,6 @@ namespace KinectYp {
                 speechEngine.SetInputToAudioStream(
                     _sensor.AudioSource.Start(), new SpeechAudioFormatInfo(EncodingFormat.Pcm, 16000, 16, 1, 32000, 2, null));
                 speechEngine.RecognizeAsync(RecognizeMode.Multiple);
-            }
-
-            //SmoothParameters
-            var parameters = new TransformSmoothParameters {
-                Smoothing = 0.3f,
-                Correction = 0.0f,
-                Prediction = 0.0f,
-                JitterRadius = 1.0f,
-                MaxDeviationRadius = 0.5f
-            };
-
-            // Alle Funktionen aktivieren
-            _sensor.SkeletonStream.Enable();
-            _sensor.AllFramesReady += new EventHandler<AllFramesReadyEventArgs>(KinectAllFramesReady);
-
-            try {
-                _sensor.Start();
-            }
-            catch (IOException) {
-                // Kinect wird bereits von einer anderen Anwendung verwendet
-                
             }
         }
 
