@@ -92,7 +92,7 @@ namespace KinectYp {
                 ****************************************************************/
 
                 // Create a grammar from grammar definition XML file.
-                using (var memoryStream = new MemoryStream(Encoding.ASCII.GetBytes(Properties.Resources.SpeechGrammar)))
+                using (var memoryStream = new MemoryStream(Encoding.ASCII.GetBytes(Resource1.SpeechGrammar)))
                 {
                     var g = new Grammar(memoryStream);
                     speechEngine.LoadGrammar(g);

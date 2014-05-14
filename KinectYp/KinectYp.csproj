@@ -54,6 +54,11 @@
     <Compile Include="Erkenner\IBlockableErkenner.cs" />
     <Compile Include="Erkenner\SpezialAngriffe\Ryu\RyuHadouken.cs" />
     <Compile Include="Erkenner\SpezialAngriffe\Ryu\RyuShoryuken.cs" />
+    <Compile Include="Resource1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource1.resx</DependentUpon>
+    </Compile>
     <Compile Include="Schnittstelle\ErkennerHandler.cs" />
     <Compile Include="Erkenner\ErkennerStatus.cs" />
     <Compile Include="Form1.cs">
@@ -85,6 +90,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Resource1.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource1.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

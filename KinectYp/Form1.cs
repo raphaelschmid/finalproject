@@ -22,12 +22,9 @@ namespace KinectYp {
             this.Location = Screen.AllScreens[1].WorkingArea.Location;
             InitializeComponent();
             positionTracker = new PositionTracker();
-            try {
+            
                 positionTracker.Init();
-            }
-            catch (Exception e) {
-                lblError.Text = e.Message;
-            }
+            
             positionTracker.Punched += Punched;
             positionTracker.Stay += Stay;
             positionTracker.PositionChanged += PositionChanged;
