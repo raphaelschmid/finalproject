@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.IO;
 using Microsoft.Kinect;
 using System;
 using System.Collections.Generic;
@@ -31,6 +32,28 @@ namespace KinectYp {
             lblKick.Text = "normal";
 
             //staarteStreetFighter();
+            startJavaServer();
+        }
+
+        void startJavaServer()
+        {
+            System.Diagnostics.Process pProcess = new System.Diagnostics.Process();
+
+            //strCommand is path and file name of command to run
+            pProcess.StartInfo.FileName = "C:\\Program Files\\Java\\jre7\\bin\\java.exe";
+
+            //strCommandParameters are parameters to pass to program
+            pProcess.StartInfo.Arguments = "-jar \"" +
+                Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(Application.ExecutablePath))) + "\\UDPServer.jar\"";
+
+            pProcess.StartInfo.UseShellExecute = false;
+
+            //Set output of program to be written to process output stream
+            pProcess.StartInfo.RedirectStandardOutput = true;
+
+            //Start the process
+            pProcess.Start();
+
         }
 
         private void Stay(object sender)
