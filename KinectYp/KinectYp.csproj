@@ -108,6 +108,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Robtoo.jar" />
     <Content Include="SprachErkenner\SpeechGrammar.xml" />
     <Content Include="UDPServer.java" />
   </ItemGroup>
