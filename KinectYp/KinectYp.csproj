@@ -108,8 +108,8 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Robtoo.jar" />
     <Content Include="SprachErkenner\SpeechGrammar.xml" />
+    <Content Include="UDPServer.jar" />
     <Content Include="UDPServer.java" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
