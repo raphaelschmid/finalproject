@@ -58,7 +58,7 @@ namespace KinectYp.Schnittstelle
 
         public static String Down()
         {
-            return DownDown() + T + DownUp() + T + ";";
+            return DownDown() + T + ";" + DownUp() + T + ";";
         }
 
         public static String DownDown()

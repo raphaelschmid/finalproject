@@ -7,6 +7,36 @@
           <item> switch </item>
         </one-of>
       </item>
+      <item>
+        <tag>DOWN</tag>
+        <one-of>
+          <item> down </item>
+        </one-of>
+      </item>
+      <item>
+        <tag>UP</tag>
+        <one-of>
+          <item> up </item>
+        </one-of>
+      </item>
+      <item>
+        <tag>LEFT</tag>
+        <one-of>
+          <item> left </item>
+        </one-of>
+      </item>
+      <item>
+        <tag>RIGHT</tag>
+        <one-of>
+          <item> right </item>
+        </one-of>
+      </item>
+      <item>
+        <tag>SELECT</tag>
+        <one-of>
+          <item> select </item>
+        </one-of>
+      </item>
     </one-of>
   </rule>
 </grammar>

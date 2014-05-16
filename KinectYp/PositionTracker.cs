@@ -241,8 +241,27 @@ namespace KinectYp {
                         {
                             Normal = true;
                             Program.Form1.setlblNormal("True");
-                            MotionFunctions.SendAction();
                         }
+                        break;
+
+                    case "UP":
+                        MotionFunctions.SendAction(MotionFunctions.Up());
+                        break;
+
+                    case "DOWN":
+                        MotionFunctions.SendAction(MotionFunctions.Down());
+                        break;
+
+                    case "LEFT":
+                        MotionFunctions.SendAction(MotionFunctions.Left());
+                        break;
+
+                    case "RIGHT":
+                        MotionFunctions.SendAction(MotionFunctions.Right());
+                        break;
+
+                    case "SELECT":
+                        MotionFunctions.SendAction(MotionFunctions.LKick());
                         break;
                 }
             }
