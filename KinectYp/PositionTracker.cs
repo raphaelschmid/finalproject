@@ -13,6 +13,9 @@ using Microsoft.Speech.AudioFormat;
 using Microsoft.Speech.Recognition;
 
 namespace KinectYp {
+    /// <summary>
+    /// Oberklasse, welche die Erkennung durhc eine Liste Erkenener verwaltet.
+    /// </summary>
     public class PositionTracker {
         private KinectSensor _sensor;
         private SpeechRecognitionEngine _speechEngine;
