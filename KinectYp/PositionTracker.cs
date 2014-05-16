@@ -235,12 +235,12 @@ namespace KinectYp {
                         if (Normal)
                         {
                             Normal = false;
-                            Program.Form1.setlblNormal("False");
+                            Program.Form1.setlblNormal("Rechts");
                         }
                         else
                         {
                             Normal = true;
-                            Program.Form1.setlblNormal("True");
+                            Program.Form1.setlblNormal("Links");
                         }
                         break;
 
