@@ -1,11 +1,15 @@
 ﻿namespace KinectYp.Erkenner
 {
+    /// <summary>
+    /// Parameter für verschiedene Erkenner
+    /// </summary>
     public static class Paramters
     {
         //////////////////////////
+        //////////////////////////
         // Rechts und Links laufen
         //////////////////////////
-
+        //////////////////////////
         // Wie nah die Füsse ananeinder sein sollen damit die Bewegung abgebrochen wird
         public const double RlMitteSchwellenwert = 0.3;
 
@@ -16,12 +20,16 @@
         public const double RlAndereFussLimite = 0.1;
 
         //////////////////////////
+        //////////////////////////
         // Jump
+        //////////////////////////
         //////////////////////////
         public const double JumpSchwelle = 0.08;
 
         //////////////////////////
+        //////////////////////////
         // Ryu Hadouken
+        //////////////////////////
         //////////////////////////
         public const double RhWieWeitNachVorneMitDenHaenden = 0.3;
         public const double RhWieParallelDieHaendeSeinSollten = 0.1;

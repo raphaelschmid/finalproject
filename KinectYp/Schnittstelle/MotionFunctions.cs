@@ -5,10 +5,17 @@ using System.Text;
 
 namespace KinectYp.Schnittstelle
 {
+    /// <summary>
+    /// Tastenkombinationen für die verschiedene StreetFighter Bewegungen.
+    /// </summary>
     static class MotionFunctions
     {
         private const int T = 50;
 
+        /// <summary>
+        /// Sends the action to the Java Server, which translates the action into actual KeyPresses.
+        /// </summary>
+        /// <param name="action">The action.</param>
         public static void SendAction(string action)
         {
             var client = new UdpClient();

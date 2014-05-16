@@ -5,6 +5,10 @@ using Microsoft.Kinect;
 
 namespace KinectYp.Erkenner.StandardAngriffe
 {
+    /// <summary>
+    /// Erkennung von "Middle Punch". Sie wird durch einen Faustschlag nach vorne
+    /// mit der Linker Hand ausgelöst.
+    /// </summary>
     class Punch : ISinglePressErkenner
     {
         public Punch()
@@ -14,6 +18,11 @@ namespace KinectYp.Erkenner.StandardAngriffe
             SingeKeyPressKeys = MotionFunctions.MPunch();
         }
 
+        /// <summary>
+        /// Prueft die history, ob die jeweilige Bewegung ausgelöst wird oder nicht.
+        /// </summary>
+        /// <param name="history">The history.</param>
+        /// <returns></returns>
         public ErkennerStatus Pruefe(Skeleton[] history)
         {
             var leftHandZ    = history.Select(x => x.Joints[JointType.HandLeft].Position.Z);
@@ -26,6 +35,10 @@ namespace KinectYp.Erkenner.StandardAngriffe
             return ErkennerHandler.SinglePress(this);
         }
 
+        /// <summary>
+        /// Gibt die Name der Erkenner für Debugzwecke zurück.
+        /// </summary>
+        /// <returns></returns>
         public string GetDebugName()
         {
             return "Punch";

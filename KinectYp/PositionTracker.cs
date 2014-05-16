@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using KinectYp.Erkenner;
 using KinectYp.Erkenner.Bewegungen;
-using KinectYp.Erkenner.SpezialAngriffe;
 using KinectYp.Erkenner.SpezialAngriffe.Ryu;
 using KinectYp.Erkenner.StandardAngriffe;
+using KinectYp.Schnittstelle;
 using Microsoft.Kinect;
 using Microsoft.Speech.AudioFormat;
 using Microsoft.Speech.Recognition;
@@ -31,16 +31,19 @@ namespace KinectYp {
 
         private class KinectNotConnectedException : Exception
         {
-
             public override string Message
             {
                 get
                 {
-                    return "Sorry something went wrong with your Kinect. Probably its not connected.";
+                    return "Sorry something went wrong with your Kinect. Probably it's not connected.";
                 }
             }
         }
 
+        /// <summary>
+        /// Initializes this instance.
+        /// </summary>
+        /// <exception cref="KinectYp.PositionTracker.KinectNotConnectedException"></exception>
         public void Init() {
 
             //erkenner hizufügen
@@ -62,48 +65,18 @@ namespace KinectYp {
                 throw new KinectNotConnectedException();
             }
 
-
-
-
             // Alle Funktionen aktivieren
             _sensor.SkeletonStream.Enable();
             _sensor.AllFramesReady += KinectAllFramesReady;
 
-            try {
-                _sensor.Start();
-            }
-            catch (IOException) {
-                // Kinect wird bereits von einer anderen Anwendung verwendet
-                
-            }
+            _sensor.Start();
+
             RecognizerInfo ri = GetKinectRecognizer();
 
             if (null != ri)
             {
 
                 _speechEngine = new SpeechRecognitionEngine(ri.Id);
-
-                /****************************************************************
-                * 
-                * Use this code to create grammar programmatically rather than from
-                * a grammar file.
-                * 
-                * var directions = new Choices();
-                * directions.Add(new SemanticResultValue("forward", "FORWARD"));
-                * directions.Add(new SemanticResultValue("forwards", "FORWARD"));
-                * directions.Add(new SemanticResultValue("straight", "FORWARD"));
-                * directions.Add(new SemanticResultValue("backward", "BACKWARD"));
-                * directions.Add(new SemanticResultValue("backwards", "BACKWARD"));
-                * directions.Add(new SemanticResultValue("back", "BACKWARD"));
-                * directions.Add(new SemanticResultValue("turn left", "LEFT"));
-                * directions.Add(new SemanticResultValue("turn right", "RIGHT"));
-                *
-                * var gb = new GrammarBuilder { Culture = ri.Culture };
-                * gb.Append(directions);
-                *
-                * var g = new Grammar(gb);
-                * 
-                ****************************************************************/
 
                 // Create a grammar from grammar definition XML file.
                 using (var memoryStream = new MemoryStream(Encoding.ASCII.GetBytes(Resource1.SpeechGrammar)))
@@ -124,6 +97,11 @@ namespace KinectYp {
             }
         }
 
+
+        /// <summary>
+        /// Gets the kinect recognizer.
+        /// </summary>
+        /// <returns></returns>
         private static RecognizerInfo GetKinectRecognizer()
         {
             foreach (RecognizerInfo recognizer in SpeechRecognitionEngine.InstalledRecognizers())
@@ -140,9 +118,10 @@ namespace KinectYp {
         }
 
 
-
+        /// <summary>
+        /// Discovers the sensor.
+        /// </summary>
         private void DiscoverSensor() {
-           
                 // Find first sensor that is connected.
                 foreach (KinectSensor sensor in KinectSensor.KinectSensors) {
                     if (sensor.Status == KinectStatus.Connected) {
@@ -152,12 +131,17 @@ namespace KinectYp {
                 }   
         }
 
+
+        /// <summary>
+        /// Wird jedes mal ausgeführt, wenn alle Frames Ready sind.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="AllFramesReadyEventArgs"/> instance containing the event data.</param>
         private void KinectAllFramesReady(object sender, AllFramesReadyEventArgs e) {
             //Gibt ein Koerper
             Skeleton first = GetFirstSkeleton(e);
 
             UpdateHistory(first);
-
 
             if (first == null)
             {
@@ -168,7 +152,6 @@ namespace KinectYp {
 
             if (_historySkeletons.Last() != null)
             {
-
                 foreach (var erkenner in Erkenners)
                 {
                     try
@@ -182,12 +165,17 @@ namespace KinectYp {
                     
                 }
             }
+
             Punched(this, display);
             PositionChanged(this, first);
         }
 
 
-
+        /// <summary>
+        /// Gets the first skeleton.
+        /// </summary>
+        /// <param name="e">The <see cref="AllFramesReadyEventArgs"/> instance containing the event data.</param>
+        /// <returns></returns>
         private Skeleton GetFirstSkeleton(AllFramesReadyEventArgs e)
         {
             using (SkeletonFrame skeletonFrameData = e.OpenSkeletonFrame()) {
@@ -205,6 +193,11 @@ namespace KinectYp {
             }
         }
 
+
+        /// <summary>
+        /// Updates the history.
+        /// </summary>
+        /// <param name="latest">The latest.</param>
         private void UpdateHistory(Skeleton latest)
         {
 
@@ -216,13 +209,10 @@ namespace KinectYp {
                 {
                     tempHistorySkeletons[i] = _historySkeletons[i - 1];
                 }
-                
             }
 
             tempHistorySkeletons[0] = latest;
-
             _historySkeletons = tempHistorySkeletons;
-
 
         }
 
@@ -236,7 +226,6 @@ namespace KinectYp {
         {
             // Speech utterance confidence below which we treat speech as if it hadn't been heard
             const double confidenceThreshold = 0.3;
-
 
             if (e.Result.Confidence >= confidenceThreshold)
             {
@@ -252,10 +241,9 @@ namespace KinectYp {
                         {
                             Normal = true;
                             Program.Form1.setlblNormal("True");
+                            MotionFunctions.SendAction();
                         }
                         break;
-
-                   
                 }
             }
         }

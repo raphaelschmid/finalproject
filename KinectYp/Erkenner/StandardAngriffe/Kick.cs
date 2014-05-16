@@ -5,6 +5,10 @@ using Microsoft.Kinect;
 
 namespace KinectYp.Erkenner.StandardAngriffe
 {
+    /// <summary>
+    /// Erkennung von "Middle Kick". Sie wird durch einen Fusstoss nach vorne
+    /// mit der Rechter Fuss ausgelöst.
+    /// </summary>
     class Kick : ISinglePressErkenner
     {
         public Kick()
@@ -14,6 +18,11 @@ namespace KinectYp.Erkenner.StandardAngriffe
             SingeKeyPressKeys = MotionFunctions.MKick();
         }
 
+        /// <summary>
+        /// Prueft die history, ob die jeweilige Bewegung ausgelöst wird oder nicht.
+        /// </summary>
+        /// <param name="history">The history.</param>
+        /// <returns></returns>
         public ErkennerStatus Pruefe(Skeleton[] history)
         {
             var rightFootZ = history.Select(x => x.Joints[JointType.FootRight].Position.Z);
@@ -24,6 +33,10 @@ namespace KinectYp.Erkenner.StandardAngriffe
             return ErkennerHandler.SinglePress(this);
         }
 
+        /// <summary>
+        /// Gibt die Name der Erkenner für Debugzwecke zurück.
+        /// </summary>
+        /// <returns></returns>
         public string GetDebugName()
         {
             return "Kick";

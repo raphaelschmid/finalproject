@@ -6,6 +6,10 @@ using Microsoft.Kinect;
 
 namespace KinectYp.Erkenner.SpezialAngriffe.Ryu
 {
+    /// <summary>
+    /// Erkennung von "Hadouken" von der Charakter Ryu. Sie ausgelöst wenn
+    /// man mit beiden Händen parallel geradeaus nach vorne stosst.
+    /// </summary>
     class RyuHadouken : ISinglePressErkenner
     {
         public RyuHadouken()
@@ -14,6 +18,11 @@ namespace KinectYp.Erkenner.SpezialAngriffe.Ryu
             BlockDuration = 400;
             SingeKeyPressKeys = MotionFunctions.Qfc() + MotionFunctions.MPunch();
         }
+        /// <summary>
+        /// Prueft die history, ob die jeweilige Bewegung ausgelöst wird oder nicht.
+        /// </summary>
+        /// <param name="history">The history.</param>
+        /// <returns></returns>
         public ErkennerStatus Pruefe(Skeleton[] history)
         {
             var rightHandZ = history.Select(x => x.Joints[JointType.HandRight].Position.Z);
@@ -27,6 +36,10 @@ namespace KinectYp.Erkenner.SpezialAngriffe.Ryu
             return ErkennerHandler.SinglePress(this);
         }
 
+        /// <summary>
+        /// Gibt die Name der Erkenner für Debugzwecke zurück.
+        /// </summary>
+        /// <returns></returns>
         public string GetDebugName()
         {
             return "hadouken";

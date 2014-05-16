@@ -5,14 +5,27 @@ using Microsoft.Kinect;
 
 namespace KinectYp.Erkenner.Bewegungen
 {
+    /// <summary>
+    /// Erkennung von Rechtslaufen. Sie wird ausgelöst, wenn man
+    /// der Rechte Fuss nach aussen ausdehnt, während der linker
+    /// Fuss in der Mitte stillsteht. Um aufzuhören geht man mit
+    /// beiden Füssen zusammen in der Mitte.
+    /// </summary>
     class LinksLaufen : IErkenner
     {
+        /// <summary>
+        /// Ob man zur Zeit nach links laufend ist oder nicht.
+        /// </summary>
         private bool _linksLaufend;
 
+        /// <summary>
+        /// Prueft die history, ob die jeweilige Bewegung ausgelöst wird oder nicht.
+        /// </summary>
+        /// <param name="history">The history.</param>
+        /// <returns></returns>
         public ErkennerStatus Pruefe(Skeleton[] history)
         {
 
-            
             var rightFootX = history.Select(x => x.Joints[JointType.FootRight].Position.X);
             var leftFootX = history.Select(x => x.Joints[JointType.FootLeft].Position.X);
 
@@ -33,9 +46,11 @@ namespace KinectYp.Erkenner.Bewegungen
             }
             return _linksLaufend ? ErkennerStatus.Aktiv : ErkennerStatus.NichtAktiv;
         }
-        
 
-
+        /// <summary>
+        /// Gibt die Name der Erkenner für Debugzwecke zurück.
+        /// </summary>
+        /// <returns></returns>
         public string GetDebugName()
         {
             return "links laufen";
