@@ -65,5 +65,10 @@ namespace KinectYp {
         {
 
         }
+
+        private void lblNormal_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

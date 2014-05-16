@@ -33,9 +33,10 @@
             this.lblNormal.Location = new System.Drawing.Point(114, 30);
             this.lblNormal.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblNormal.Name = "lblNormal";
-            this.lblNormal.Size = new System.Drawing.Size(72, 38);
+            this.lblNormal.Size = new System.Drawing.Size(119, 38);
             this.lblNormal.TabIndex = 4;
-            this.lblNormal.Text = "true";
+            this.lblNormal.Text = "Rechts";
+            this.lblNormal.Click += new System.EventHandler(this.lblNormal_Click);
             // 
             // Form1
             // 
