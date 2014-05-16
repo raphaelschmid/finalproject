@@ -1,37 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using KinectYp.Erkenner;
 using KinectYp.Erkenner.Bewegungen;
 using KinectYp.Erkenner.SpezialAngriffe;
+using KinectYp.Erkenner.SpezialAngriffe.Ryu;
+using KinectYp.Erkenner.StandardAngriffe;
 using Microsoft.Kinect;
 using Microsoft.Speech.AudioFormat;
 using Microsoft.Speech.Recognition;
-using System.Drawing;
-using Microsoft.Speech.Synthesis;
 
 namespace KinectYp {
     public class PositionTracker {
         private KinectSensor _sensor;
-        private SpeechRecognitionEngine speechEngine;
-        bool _closing = false;
-        private const int _skeletonCount = 6;
+        private SpeechRecognitionEngine _speechEngine;
+        private const int SkeletonCount = 6;
         public delegate void PunchEventHandler(object sender, string message);
         public delegate void StayEventHandler(object sender);
         public delegate void PositionChangedEventHandler(object sender, Skeleton p);
         public event PunchEventHandler Punched;
         public event StayEventHandler Stay;
         public event PositionChangedEventHandler PositionChanged;
-        public List<IErkenner> erkenners;
-        public bool normal = true;
+        public List<IErkenner> Erkenners;
+        public bool Normal = true;
 
         private const int HistorySize = 30;
-        Skeleton[] HistorySkeletons = new Skeleton[HistorySize];
+        Skeleton[] _historySkeletons = new Skeleton[HistorySize];
 
-        public class KinectNotConnectedException : Exception
+        private class KinectNotConnectedException : Exception
         {
 
             public override string Message
@@ -46,16 +44,18 @@ namespace KinectYp {
         public void Init() {
 
             //erkenner hizufügen
-            erkenners = new List<IErkenner>();
-            erkenners.Add(new RechtsLaufen());
-            erkenners.Add(new LinksLaufen());
-            erkenners.Add(new Kick());
-            erkenners.Add(new Punch());
-            erkenners.Add(new Ducken());
-            erkenners.Add(new Jump());
-            erkenners.Add(new RyuHadouken());
-            erkenners.Add(new RyuShoryuken());
-  
+            Erkenners = new List<IErkenner>
+            {
+                new RechtsLaufen(),
+                new LinksLaufen(),
+                new Kick(),
+                new Punch(),
+                new Ducken(),
+                new Jump(),
+                new RyuHadouken(),
+                new RyuShoryuken()
+            };
+
             DiscoverSensor();
 
             if (_sensor == null) {
@@ -64,18 +64,10 @@ namespace KinectYp {
 
 
 
-            //SmoothParameters
-            var parameters = new TransformSmoothParameters {
-                Smoothing = 0.3f,
-                Correction = 0.0f,
-                Prediction = 0.0f,
-                JitterRadius = 1.0f,
-                MaxDeviationRadius = 0.5f
-            };
 
             // Alle Funktionen aktivieren
             _sensor.SkeletonStream.Enable();
-            _sensor.AllFramesReady += new EventHandler<AllFramesReadyEventArgs>(KinectAllFramesReady);
+            _sensor.AllFramesReady += KinectAllFramesReady;
 
             try {
                 _sensor.Start();
@@ -89,7 +81,7 @@ namespace KinectYp {
             if (null != ri)
             {
 
-                speechEngine = new SpeechRecognitionEngine(ri.Id);
+                _speechEngine = new SpeechRecognitionEngine(ri.Id);
 
                 /****************************************************************
                 * 
@@ -117,18 +109,18 @@ namespace KinectYp {
                 using (var memoryStream = new MemoryStream(Encoding.ASCII.GetBytes(Resource1.SpeechGrammar)))
                 {
                     var g = new Grammar(memoryStream);
-                    speechEngine.LoadGrammar(g);
+                    _speechEngine.LoadGrammar(g);
                 }
 
-                speechEngine.SpeechRecognized += SpeechRecognized;
+                _speechEngine.SpeechRecognized += SpeechRecognized;
 
                 // For long recognition sessions (a few hours or more), it may be beneficial to turn off adaptation of the acoustic model. 
                 // This will prevent recognition accuracy from degrading over time.
                 ////speechEngine.UpdateRecognizerSetting("AdaptationOn", 0);
 
-                speechEngine.SetInputToAudioStream(
+                _speechEngine.SetInputToAudioStream(
                     _sensor.AudioSource.Start(), new SpeechAudioFormatInfo(EncodingFormat.Pcm, 16000, 16, 1, 32000, 2, null));
-                speechEngine.RecognizeAsync(RecognizeMode.Multiple);
+                _speechEngine.RecognizeAsync(RecognizeMode.Multiple);
             }
         }
 
@@ -161,10 +153,6 @@ namespace KinectYp {
         }
 
         private void KinectAllFramesReady(object sender, AllFramesReadyEventArgs e) {
-            if (_closing) {
-                return;
-            }
-
             //Gibt ein Koerper
             Skeleton first = GetFirstSkeleton(e);
 
@@ -178,14 +166,14 @@ namespace KinectYp {
 
             string display = "";
 
-            if (HistorySkeletons.Last() != null)
+            if (_historySkeletons.Last() != null)
             {
 
-                foreach (var erkenner in erkenners)
+                foreach (var erkenner in Erkenners)
                 {
                     try
                     {
-                        display += erkenner.GetDebugName().PadRight(20) + erkenner.Pruefe(HistorySkeletons) + "\n";
+                        display += erkenner.GetDebugName().PadRight(20) + erkenner.Pruefe(_historySkeletons) + "\n";
                     }
                     catch (Exception ex)
                     {
@@ -206,7 +194,7 @@ namespace KinectYp {
                 if (skeletonFrameData == null) {
                     return null;
                 }
-                Skeleton[] latestSkeletons = new Skeleton[_skeletonCount];
+                Skeleton[] latestSkeletons = new Skeleton[SkeletonCount];
 
                 skeletonFrameData.CopySkeletonDataTo(latestSkeletons);
                 Skeleton first = latestSkeletons.FirstOrDefault(s => s.TrackingState == SkeletonTrackingState.Tracked);
@@ -222,42 +210,20 @@ namespace KinectYp {
 
             Skeleton[] tempHistorySkeletons = new Skeleton[HistorySize];
 
-            for (int i = 1; i < HistorySkeletons.Length; i++)
+            for (int i = 1; i < _historySkeletons.Length; i++)
             {
-                if (HistorySkeletons[i - 1] != null)
+                if (_historySkeletons[i - 1] != null)
                 {
-                    tempHistorySkeletons[i] = HistorySkeletons[i - 1];
+                    tempHistorySkeletons[i] = _historySkeletons[i - 1];
                 }
                 
             }
 
             tempHistorySkeletons[0] = latest;
 
-            HistorySkeletons = tempHistorySkeletons;
+            _historySkeletons = tempHistorySkeletons;
 
 
-        }
-
-        /// <summary>
-        /// Execute uninitialization tasks.
-        /// </summary>
-        /// <param name="sender">object sending the event.</param>
-        /// <param name="e">event arguments.</param>
-        private void WindowClosing(object sender, CancelEventArgs e)
-        {
-            if (null != this._sensor)
-            {
-                this._sensor.AudioSource.Stop();
-
-                this._sensor.Stop();
-                this._sensor = null;
-            }
-
-            if (null != this.speechEngine)
-            {
-                this.speechEngine.SpeechRecognized -= SpeechRecognized;
-                this.speechEngine.RecognizeAsyncStop();
-            }
         }
 
 
@@ -269,23 +235,23 @@ namespace KinectYp {
         private void SpeechRecognized(object sender, SpeechRecognizedEventArgs e)
         {
             // Speech utterance confidence below which we treat speech as if it hadn't been heard
-            const double ConfidenceThreshold = 0.3;
+            const double confidenceThreshold = 0.3;
 
 
-            if (e.Result.Confidence >= ConfidenceThreshold)
+            if (e.Result.Confidence >= confidenceThreshold)
             {
                 switch (e.Result.Semantics.Value.ToString())
                 {
                     case "SWITCH":
-                        if (normal)
+                        if (Normal)
                         {
-                            normal = false;
-                            Program.form1.setlblNormal("False");
+                            Normal = false;
+                            Program.Form1.setlblNormal("False");
                         }
                         else
                         {
-                            normal = true;
-                            Program.form1.setlblNormal("True");
+                            Normal = true;
+                            Program.Form1.setlblNormal("True");
                         }
                         break;
 

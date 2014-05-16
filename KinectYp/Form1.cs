@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.IO;
+using KinectYp.Schnittstelle;
 using Microsoft.Kinect;
 using System;
 using System.Collections.Generic;

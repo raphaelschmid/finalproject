@@ -1,4 +1,4 @@
-namespace KinectYp
+namespace KinectYp.Erkenner
 {
-    public enum ErkennerStatus { blocked, aktiv, nicht_aktiv, error };
+    public enum ErkennerStatus { Blocked, Aktiv, NichtAktiv };
 }

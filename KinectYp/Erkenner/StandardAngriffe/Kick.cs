@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms.VisualStyles;
+using KinectYp.Schnittstelle;
 using Microsoft.Kinect;
-using System.Diagnostics;
 
-namespace KinectYp
+namespace KinectYp.Erkenner.StandardAngriffe
 {
     class Kick : ISinglePressErkenner
     {
@@ -23,7 +19,7 @@ namespace KinectYp
             var rightFootZ = history.Select(x => x.Joints[JointType.FootRight].Position.Z);
             var rightFootY = history.Select(x => x.Joints[JointType.FootRight].Position.Y);
 
-            Ok = (rightFootZ.Max() > rightFootZ.First() + 0.5) && (rightFootY.First() > rightFootY.Min() + 0.2);
+            Ok = rightFootZ.Max() > rightFootZ.First() + 0.5 && (rightFootY.First() > rightFootY.Min() + 0.2);
 
             return ErkennerHandler.SinglePress(this);
         }

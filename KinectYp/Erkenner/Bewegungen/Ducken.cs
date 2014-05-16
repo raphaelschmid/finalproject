@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using KinectYp.Erkenner;
+using KinectYp.Schnittstelle;
 using Microsoft.Kinect;
 
-namespace KinectYp
+namespace KinectYp.Erkenner.Bewegungen
 {
     class Ducken : IBlockableErkenner
     {
@@ -16,7 +12,7 @@ namespace KinectYp
             Blocked = false;
 
         }
-        private bool geduckt = false;
+        private bool _geduckt;
         public ErkennerStatus Pruefe(Skeleton[] history)
         {
 
@@ -41,21 +37,21 @@ namespace KinectYp
 
             if (!Blocked)
             {
-                if (geduckt && oben)
+                if (_geduckt && oben)
                 {
-                    geduckt = false;
+                    _geduckt = false;
                     MotionFunctions.SendAction(MotionFunctions.DownUp());
-                    return ErkennerStatus.nicht_aktiv;
+                    return ErkennerStatus.NichtAktiv;
                 }
-                if (!geduckt && unten)
+                if (!_geduckt && unten)
                 {
-                    geduckt = true;
+                    _geduckt = true;
                     MotionFunctions.SendAction(MotionFunctions.DownDown());
-                    return ErkennerStatus.aktiv;
+                    return ErkennerStatus.Aktiv;
                 }
             }
             
-            return geduckt ? ErkennerStatus.aktiv : ErkennerStatus.nicht_aktiv;
+            return _geduckt ? ErkennerStatus.Aktiv : ErkennerStatus.NichtAktiv;
         }
 
         public string GetDebugName()
@@ -63,7 +59,7 @@ namespace KinectYp
             return "Ducken";
         }
 
-        public Stopwatch BlockStopwatch { get; set; }
-        public bool Blocked { get; set; }
+        public Stopwatch BlockStopwatch { private get; set; }
+        public bool Blocked { private get; set; }
     }
 }

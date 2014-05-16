@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace KinectYp
+﻿namespace KinectYp.Erkenner
 {
     public static class Paramters
     {
@@ -13,24 +7,23 @@ namespace KinectYp
         //////////////////////////
 
         // Wie nah die Füsse ananeinder sein sollen damit die Bewegung abgebrochen wird
-        public static double rlMitteSchwellenwert = 0.3;
+        public const double RlMitteSchwellenwert = 0.3;
 
         // Wie weit man mit den jeweiligen Fuss nach aussen gehen muss, um in diese Richtung zu bewewgen
-        public static double rlAktivierungsSchwelle = 0.2;
+        public const double RlAktivierungsSchwelle = 0.2;
 
         // Um wie viel der andere Fuss sich höchstens bewegen darf
-        public static double rlAndereFussLimite = 0.1;
+        public const double RlAndereFussLimite = 0.1;
 
         //////////////////////////
         // Jump
         //////////////////////////
-        public static double jumpSchwelle = 0.08;
+        public const double JumpSchwelle = 0.08;
 
         //////////////////////////
         // Ryu Hadouken
         //////////////////////////
-        public static double rhWieWeitNachVorneMitDenHaenden = 0.3;
-        public static double rhWieParallelDieHaendeSeinSollten = 0.1;
-
+        public const double RhWieWeitNachVorneMitDenHaenden = 0.3;
+        public const double RhWieParallelDieHaendeSeinSollten = 0.1;
     }
 }

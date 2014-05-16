@@ -1,12 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using KinectYp.Schnittstelle;
 using Microsoft.Kinect;
 
-namespace KinectYp.Erkenner.SpezialAngriffe
+namespace KinectYp.Erkenner.SpezialAngriffe.Ryu
 {
     class RyuHadouken : ISinglePressErkenner
     {
@@ -22,9 +20,9 @@ namespace KinectYp.Erkenner.SpezialAngriffe
             var leftHandZ = history.Select(x => x.Joints[JointType.HandLeft].Position.Z);
 
             
-            Ok = (rightHandZ.Max() - rightHandZ.First()  > Paramters.rhWieWeitNachVorneMitDenHaenden)
-                 && (leftHandZ.Max() - leftHandZ.First() > Paramters.rhWieWeitNachVorneMitDenHaenden)
-                 && (leftHandZ.First() - leftHandZ.First() < Paramters.rhWieParallelDieHaendeSeinSollten);
+            Ok = (rightHandZ.Max() - rightHandZ.First()  > Paramters.RhWieWeitNachVorneMitDenHaenden)
+                 && (leftHandZ.Max() - leftHandZ.First() > Paramters.RhWieWeitNachVorneMitDenHaenden)
+                 && (leftHandZ.First() - leftHandZ.First() < Paramters.RhWieParallelDieHaendeSeinSollten);
 
             return ErkennerHandler.SinglePress(this);
         }
@@ -39,12 +37,11 @@ namespace KinectYp.Erkenner.SpezialAngriffe
         public int BlockDuration { get; private set; }
         public bool Ok { get; private set; }
 
-        private string _SingeKeyPressKeys;
         public string SingeKeyPressKeys
         {
             get
             {
-                if (Form1.positionTracker.normal)
+                if (Form1.positionTracker.Normal)
                 {
                     return MotionFunctions.Qfc() + MotionFunctions.MPunch();
                 }
@@ -54,7 +51,7 @@ namespace KinectYp.Erkenner.SpezialAngriffe
                 }
                 
             }
-            set { _SingeKeyPressKeys = value; }
+            private set { if (value == null) throw new ArgumentNullException("value"); }
         }
     }
 }

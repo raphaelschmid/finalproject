@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using KinectYp.Erkenner;
-using KinectYp.Erkenner.Bewegungen;
 
-namespace KinectYp
+namespace KinectYp.Schnittstelle
 {
     public static class ErkennerHandler
     {
@@ -21,28 +15,28 @@ namespace KinectYp
                 erkenner.Blocked = false;
                 
 
-                foreach (var e in Form1.positionTracker.erkenners)
+                foreach (var e in Form1.positionTracker.Erkenners)
                 {
                     if (e.GetDebugName().Equals("Jump"))
                     {
-                        foreach (var ee in Form1.positionTracker.erkenners)
+                        foreach (var ee in Form1.positionTracker.Erkenners)
                         {
                             if (ee.GetDebugName().Equals("Ducken"))
                             {
-                                IBlockableErkenner DuckenErkenner = (IBlockableErkenner) ee;
-                                DuckenErkenner.Blocked = true;
-                                DuckenErkenner.BlockStopwatch = Stopwatch.StartNew();
+                                IBlockableErkenner duckenErkenner = (IBlockableErkenner) ee;
+                                duckenErkenner.Blocked = true;
+                                duckenErkenner.BlockStopwatch = Stopwatch.StartNew();
 
                             }
                         }
                     }
                 }
-                return ErkennerStatus.nicht_aktiv;
+                return ErkennerStatus.NichtAktiv;
             }
 
             if (erkenner.Blocked)
             {
-                return ErkennerStatus.blocked;
+                return ErkennerStatus.Blocked;
             }
 
             if (erkenner.Ok)
@@ -50,10 +44,10 @@ namespace KinectYp
                 MotionFunctions.SendAction(erkenner.SingeKeyPressKeys);
                 erkenner.Blocked = true;
                 erkenner.Stopwatch = Stopwatch.StartNew();
-                return ErkennerStatus.aktiv;
+                return ErkennerStatus.Aktiv;
             }
 
-            return ErkennerStatus.nicht_aktiv;
+            return ErkennerStatus.NichtAktiv;
         }
     }
 }

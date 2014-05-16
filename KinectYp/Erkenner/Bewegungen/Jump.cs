@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using KinectYp.Schnittstelle;
 using Microsoft.Kinect;
 
 namespace KinectYp.Erkenner.Bewegungen
@@ -23,8 +20,8 @@ namespace KinectYp.Erkenner.Bewegungen
             var rightFootY = history.Select(x => x.Joints[JointType.FootRight].Position.Y);
             //var headY = history.Select(x => x.Joints[JointType.Head].Position.Y);
 
-            Ok = (leftFootY.First() - leftFootY.Min()> Paramters.jumpSchwelle) &&
-                (rightFootY.First() - rightFootY.Min() > Paramters.jumpSchwelle);
+            Ok = (leftFootY.First() - leftFootY.Min()> Paramters.JumpSchwelle) &&
+                (rightFootY.First() - rightFootY.Min() > Paramters.JumpSchwelle);
 
             return ErkennerHandler.SinglePress(this);
         }

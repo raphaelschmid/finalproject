@@ -1,37 +1,35 @@
-﻿using Microsoft.Kinect;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using KinectYp.Schnittstelle;
+using Microsoft.Kinect;
 
-namespace KinectYp
+namespace KinectYp.Erkenner.Bewegungen
 {
     class RechtsLaufen : IErkenner
     {
-        private bool rechtsLaufend = false;
+        private bool _rechtsLaufend;
         public ErkennerStatus Pruefe(Skeleton[] history)
         {
             
             var rightFootX = history.Select(x => x.Joints[JointType.FootRight].Position.X);
             var leftFootX = history.Select(x => x.Joints[JointType.FootLeft].Position.X);
 
-            bool rechts = rightFootX.Min() + Paramters.rlAktivierungsSchwelle < rightFootX.First() && (leftFootX.Max() - leftFootX.Min()) < Paramters.rlAndereFussLimite;
-            bool mitte = Math.Abs(rightFootX.First() - leftFootX.First()) < Paramters.rlMitteSchwellenwert;
+            bool rechts = rightFootX.Min() + Paramters.RlAktivierungsSchwelle < rightFootX.First() && (leftFootX.Max() - leftFootX.Min()) < Paramters.RlAndereFussLimite;
+            bool mitte = Math.Abs(rightFootX.First() - leftFootX.First()) < Paramters.RlMitteSchwellenwert;
 
-            if (rechtsLaufend && mitte)
+            if (_rechtsLaufend && mitte)
             {
-                rechtsLaufend = false;
+                _rechtsLaufend = false;
                 MotionFunctions.SendAction(MotionFunctions.RightUp());
-                return ErkennerStatus.nicht_aktiv;
+                return ErkennerStatus.NichtAktiv;
             }
-            if (!rechtsLaufend && rechts)
+            if (!_rechtsLaufend && rechts)
             {
-                rechtsLaufend = true;
+                _rechtsLaufend = true;
                 MotionFunctions.SendAction(MotionFunctions.RightDown());
-                return ErkennerStatus.aktiv;
+                return ErkennerStatus.Aktiv;
             }
-            return rechtsLaufend ? ErkennerStatus.aktiv : ErkennerStatus.nicht_aktiv;
+            return _rechtsLaufend ? ErkennerStatus.Aktiv : ErkennerStatus.NichtAktiv;
         }
 
         public string GetDebugName()

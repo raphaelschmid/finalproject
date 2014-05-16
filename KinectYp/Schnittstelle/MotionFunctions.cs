@@ -1,16 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace KinectYp
+namespace KinectYp.Schnittstelle
 {
-    class MotionFunctions
+    static class MotionFunctions
     {
-        static int t = 50;
+        private const int T = 50;
 
         public static void SendAction(string action)
         {
@@ -23,7 +20,7 @@ namespace KinectYp
 
         public static String Left()
         {
-            return LeftDown() + t + ";" + LeftUp() + t + ";";
+            return LeftDown() + T + ";" + LeftUp() + T + ";";
         }
         public static String LeftDown()
         {
@@ -35,7 +32,7 @@ namespace KinectYp
         }
         public static String Right()
         {
-            return RightDown() + t + ";" + RightUp() + t + ";";
+            return RightDown() + T + ";" + RightUp() + T + ";";
         }
 
         public static String RightDown()
@@ -49,12 +46,12 @@ namespace KinectYp
 
         public static String Up()
         {
-            return "dz;" + t + ";uz;" + t + ";";
+            return "dz;" + T + ";uz;" + T + ";";
         }
 
         public static String Down()
         {
-            return DownDown() + t + DownUp() + t + ";";
+            return DownDown() + T + DownUp() + T + ";";
         }
 
         public static String DownDown()
@@ -69,72 +66,72 @@ namespace KinectYp
 
         public static String MPunch()
         {
-            return "ds;" + t + ";us;" + t + ";";
+            return "ds;" + T + ";us;" + T + ";";
         }
 
         public static String LPunch()
         {
-            return "da;" + t + ";ua;" + t + ";";
+            return "da;" + T + ";ua;" + T + ";";
         }
 
         public static String HPunch()
         {
-            return "dd;" + t + ";ud;" + t + ";";
+            return "dd;" + T + ";ud;" + T + ";";
         }
 
         public static String TripplePunch()
         {
-            return "dq;" + t + ";uq;" + t + ";";
+            return "dq;" + T + ";uq;" + T + ";";
         }
 
         public static String MKick()
         {
-            return "dx;" + t + ";ux;" + t + ";";
+            return "dx;" + T + ";ux;" + T + ";";
         }
 
         public static String LKick()
         {
-            return "dy;" + t + ";uy;" + t + ";";
+            return "dy;" + T + ";uy;" + T + ";";
         }
 
         public static String HKick()
         {
-            return "dc;" + t + ";uc;" + t + ";";
+            return "dc;" + T + ";uc;" + T + ";";
         }
 
         public static String TrippleKick()
         {
-            return "de;" + t + ";ue;" + t + ";";
+            return "de;" + T + ";ue;" + T + ";";
         }
 
         public static String Qfc()
         {
-            return "db;" + t + ";dh;" + t + ";ub;" + t + ";uh;" + t + ";";
+            return "db;" + T + ";dh;" + T + ";ub;" + T + ";uh;" + T + ";";
         }
 
         public static String Qbc()
         {
-            return "db;" + t + ";dg;" + t + ";ub;" + t + ";ug;" + t + ";";
+            return "db;" + T + ";dg;" + T + ";ub;" + T + ";ug;" + T + ";";
         }
 
         public static String HalfCircle()
         {
-            return "dg;" + t + ";db;" + t + ";ug;" + t + ";dh;" + t + ";ub;" + t + ";uh;" + t + ";";
+            return "dg;" + T + ";db;" + T + ";ug;" + T + ";dh;" + T + ";ub;" + T + ";uh;" + T + ";";
         }
 
         public static String FullCircle()
         {
-            return "dh;" + t + ";db;" + t + ";uh;" + t + ";dg;" + t + ";ub;" + t + ";dz;" + t + ";ug;" + t + ";dh;" + t + ";uz;" + t + ";uh;" + t + ";";
+            return "dh;" + T + ";db;" + T + ";uh;" + T + ";dg;" + T + ";ub;" + T + ";dz;" + T + ";ug;" + T + ";dh;" + T + ";uz;" + T + ";uh;" + T + ";";
         }
 
         public static String ForwardZ()
         {
-            return "dh;" + t + ";uh;" + t + ";db;" + t + ";dh;" + t + ";ub;" + t + ";uh;" + t + ";";
+            return "dh;" + T + ";uh;" + T + ";db;" + T + ";dh;" + T + ";ub;" + T + ";uh;" + T + ";";
         }
 
         public static String BackwardZ()
         {
-            return "dg;" + t + ";ug;" + t + ";db;" + t + ";dg;" + t + ";ub;" + t + ";ug;" + t + ";";
+            return "dg;" + T + ";ug;" + T + ";db;" + T + ";dg;" + T + ";ub;" + T + ";ug;" + T + ";";
         }
     }
 }

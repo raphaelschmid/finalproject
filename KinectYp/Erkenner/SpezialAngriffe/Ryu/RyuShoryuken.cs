@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using KinectYp.Schnittstelle;
 using Microsoft.Kinect;
 
-namespace KinectYp.Erkenner.SpezialAngriffe
+namespace KinectYp.Erkenner.SpezialAngriffe.Ryu
 {
     class RyuShoryuken : ISinglePressErkenner
     {
@@ -24,7 +21,7 @@ namespace KinectYp.Erkenner.SpezialAngriffe
             var headX = history.Select(x => x.Joints[JointType.Head].Position.X);
             var leftShoulderY = history.Select(x => x.Joints[JointType.ShoulderLeft].Position.Y);
 
-            Ok = (rightHandX.First() < rightHandX.Max() - 0.2) && (rightHandY.First() > leftShoulderY.First()) && (rightHandX.First() < headX.First() - 0.2);
+            Ok = rightHandX.First() < rightHandX.Max() - 0.2 && (rightHandY.First() > leftShoulderY.First()) && (rightHandX.First() < headX.First() - 0.2);
 
             return ErkennerHandler.SinglePress(this);
         }
@@ -44,7 +41,7 @@ namespace KinectYp.Erkenner.SpezialAngriffe
         {
             get
             {
-                if (Form1.positionTracker.normal)
+                if (Form1.positionTracker.Normal)
                 {
                     return MotionFunctions.Right() + MotionFunctions.Qfc() + MotionFunctions.MPunch();
                 }
@@ -54,7 +51,7 @@ namespace KinectYp.Erkenner.SpezialAngriffe
                 }
 
             }
-            set { _SingeKeyPressKeys = value; }
+            private set { _SingeKeyPressKeys = value; }
         }
     }
 }

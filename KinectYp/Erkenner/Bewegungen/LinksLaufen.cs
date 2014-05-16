@@ -1,16 +1,13 @@
-﻿using System.Drawing.Text;
-using Microsoft.Kinect;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using KinectYp.Schnittstelle;
+using Microsoft.Kinect;
 
-namespace KinectYp
+namespace KinectYp.Erkenner.Bewegungen
 {
     class LinksLaufen : IErkenner
     {
-        private bool linksLaufend = false;
+        private bool _linksLaufend;
 
         public ErkennerStatus Pruefe(Skeleton[] history)
         {
@@ -19,22 +16,22 @@ namespace KinectYp
             var rightFootX = history.Select(x => x.Joints[JointType.FootRight].Position.X);
             var leftFootX = history.Select(x => x.Joints[JointType.FootLeft].Position.X);
 
-            bool links = (leftFootX.First() + Paramters.rlAktivierungsSchwelle < leftFootX.Max()) && ((rightFootX.Max() - rightFootX.Min()) < Paramters.rlAndereFussLimite);
-            bool mitte = Math.Abs(rightFootX.First() - leftFootX.First()) < Paramters.rlMitteSchwellenwert;
+            bool links = (leftFootX.First() + Paramters.RlAktivierungsSchwelle < leftFootX.Max()) && ((rightFootX.Max() - rightFootX.Min()) < Paramters.RlAndereFussLimite);
+            bool mitte = Math.Abs(rightFootX.First() - leftFootX.First()) < Paramters.RlMitteSchwellenwert;
 
-            if (linksLaufend && mitte)
+            if (_linksLaufend && mitte)
             {
-                linksLaufend = false;
+                _linksLaufend = false;
                 MotionFunctions.SendAction(MotionFunctions.LeftUp());
-                return ErkennerStatus.nicht_aktiv;
+                return ErkennerStatus.NichtAktiv;
             }
-            if (!linksLaufend && links)
+            if (!_linksLaufend && links)
             {
-                linksLaufend = true;
+                _linksLaufend = true;
                 MotionFunctions.SendAction(MotionFunctions.LeftDown());
-                return ErkennerStatus.aktiv;
+                return ErkennerStatus.Aktiv;
             }
-            return linksLaufend ? ErkennerStatus.aktiv : ErkennerStatus.nicht_aktiv;
+            return _linksLaufend ? ErkennerStatus.Aktiv : ErkennerStatus.NichtAktiv;
         }
         
 

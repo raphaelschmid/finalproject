@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using KinectYp.Schnittstelle;
 using Microsoft.Kinect;
 
-namespace KinectYp
+namespace KinectYp.Erkenner.StandardAngriffe
 {
     class Punch : ISinglePressErkenner
     {
@@ -24,7 +21,7 @@ namespace KinectYp
             var leftShoulderY = history.Select(x => x.Joints[JointType.ShoulderLeft].Position.Y);
             var rightHandZ     = history.Select(x => x.Joints[JointType.HandRight].Position.Z);
 
-            Ok = (leftHandZ.First() < leftHandZ.Max() - 0.27) && (leftHandY.First() < leftShoulderY.First() + 0.1) && (rightHandZ.Max() - rightHandZ.First() < 0.15);
+            Ok = leftHandZ.First() < leftHandZ.Max() - 0.27 && (leftHandY.First() < leftShoulderY.First() + 0.1) && (rightHandZ.Max() - rightHandZ.First() < 0.15);
 
             return ErkennerHandler.SinglePress(this);
         }

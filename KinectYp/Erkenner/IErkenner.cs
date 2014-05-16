@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.Kinect;
+﻿using Microsoft.Kinect;
 
-namespace KinectYp
+namespace KinectYp.Erkenner
 {
 
     public interface IErkenner
