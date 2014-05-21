@@ -168,9 +168,8 @@ namespace KinectYp {
                     
                 }
             }
-
-            Punched(this, display);
-            PositionChanged(this, first);
+          
+            //PositionChanged(this, first);
         }
 
 

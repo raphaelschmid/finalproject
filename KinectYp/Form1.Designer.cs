@@ -44,6 +44,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(325, 104);
             this.Controls.Add(this.lblNormal);
+            this.Location = new System.Drawing.Point(1800, 300);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form1";
             this.Text = "Spieler 1 Ausrichtung";

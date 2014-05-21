@@ -21,7 +21,7 @@ namespace KinectYp {
         public Form1()
         {
             this.Show();
-            this.Location = Screen.AllScreens[1].WorkingArea.Location;
+            this.Location = Screen.AllScreens[0].WorkingArea.Location;
             InitializeComponent();
             positionTracker = new PositionTracker();
             
